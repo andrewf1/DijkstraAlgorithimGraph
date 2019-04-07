@@ -4,10 +4,10 @@
 class Graph : public GraphBase {
 public:
     //change these later
-    Graph() : n{0} {};
+    Graph() : n{0} {}
     ~Graph() = default;
 
-    int size() { return n; }
+    int size() { return n; } // number of verticies in graph
 
     virtual void addVertex(std::string label); //inserts a new vertex storing the element
     virtual void removeVertex(std::string label);  // remove vertex containing the element and all its incident edges
@@ -19,16 +19,18 @@ public:
     std::list<Edge> edges(); //returns an edge list of all the edges of the graph
     
 private:
-    std::list<std::vector<std::string>> adjacency_list;
-    int n; //number of vertecies in the graph
+    std::vector<std::vector<Vertex>> adjacency_list;
+    int n;
 };
 
 class Edge {
 public:
-
+    Edge(std::string label1, std::string label2, unsigned long _weight) :
+        endpoint1{label1}, endpoint2{label2}, weight{_weight} {}
 private:
     std::string endpoint1;
     std::string endpoint2;
+    unsigned long weight;
 };
 
 class Vertex {
@@ -36,8 +38,6 @@ public:
     Vertex(std::string held = "") : data{held} {};
     std::string operator*() { return data; }; //return element at vertex
     bool isAdjacentTo(Vertex v);
-private:
-    std::string element;
 private:
     std::string data;
 };
