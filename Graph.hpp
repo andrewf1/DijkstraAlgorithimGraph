@@ -15,11 +15,12 @@ public:
     virtual void removeEdge(std::string label1, std::string label2); // remove the edge between the two vertices given
     virtual unsigned long shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path);
 
-    std::list<Vertex> vertices(); // returns a vertex list of all the vertices of the graph
+    std::vector<Vertex> get_vertices() { return vertices; } // returns a vertex list of all the vertices of the graph
     std::list<Edge> edges(); //returns an edge list of all the edges of the graph
     
 private:
-    std::vector<std::vector<Vertex>> adjacency_list;
+    std::vector<std::list<Edge>> adjacency_list;
+    std::vector<Vertex> vertices;
     int n;
 };
 

@@ -2,7 +2,7 @@
 
 void Graph::addVertex(std::string label) {
     Vertex v{label};
-    adjacency_list.push_back.push_back(v);
+    vertices.push_back(v);
 }
 
 void removeVertex(std::string label) { 
@@ -11,11 +11,12 @@ void removeVertex(std::string label) {
 
 void Graph::addEdge(std::string label1, std::string label2, unsigned long weight) {
     Edge e{label1, label2, weight};
-    for (auto vec : adjacency_list) {
-        for (auto j : vec) {
-            if (*j == label1) {
-                vec.push_back(e);
-            }
+    
+    for (auto i = 0; i < vertices.size(); i++) {
+        auto v = vertices.at(i);
+        if (*v == label1) {
+            adjacency_list.at(i).push_back(e);
+            break;
         }
     }
 }
