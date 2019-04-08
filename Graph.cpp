@@ -30,17 +30,17 @@ void Graph::removeVertex(std::string label) {
 void Graph::addEdge(std::string label1, std::string label2, unsigned long weight) {
     Edge e{label1, label2, weight};
 
-    for (auto v : adjacency_list) {
-        // if (*(v.first) == label1) {
-        //     (v.second).push_back(e);
-        // }
-        // if(*(v.first) == label2) {
-        //     (v.second).push_back(e);
-        // }
-        if ((*(v.first) == label1) || (*(v.first) == label2)) {
-            (v.second).push_back(e);
+    for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
+        if ((*(v->first) == label1) || (*(v->first) == label2)) {
+            (v->second).push_back(e);
         }
     }
+
+    // for (auto v : adjacency_list) {
+    //     if ((*(v.first) == label1) || (*(v.first) == label2)) {
+    //         (v.second).push_back(e);
+    //     }
+    // }
 }
 
 void Graph::removeEdge(std::string label1, std::string label2) {
