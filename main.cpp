@@ -1,6 +1,24 @@
 #include "Graph.hpp"
 #include <iostream>
 
+void printVerticies(std::vector<Vertex> vertexV) {
+    std::cout << "VERTEXES ARE: " << std::endl;
+    for (auto v : vertexV) {
+        std::cout << *v << std::endl;
+    }
+}
+
+void printEdges(std::vector<std::list<Edge>> adjl) {
+    std::cout << "Edges are: " << std::endl;
+    for (auto l :adjl) {
+        for (auto e : l) {
+            std::cout << "Vertex: " << e.get_endpoint1() << " endpoint = " << 
+            e.get_endpoint2() << " weight = " << e.get_weight() << std::endl;
+        }
+        std::cout << std::endl;
+    }
+}
+
 int main() {
     struct EdgeStruct { std::string a; std::string b; unsigned long w; };
 
@@ -20,18 +38,15 @@ int main() {
     auto vertexV = g.get_vertices();
     auto adjl = g.get_adjacency_list();
 
-    std::cout << "VERTEXES ARE: " << std::endl;
-    for (auto v : vertexV) {
-        std::cout << *v << std::endl;
-    }
+    printVerticies(vertexV);
+    printEdges(adjl);
 
-    std::cout << "Edges are: " << std::endl;
-    for (auto l :adjl) {
-        for (auto e : l) {
-            std::cout << "endpoint 1 = " << e.get_endpoint1() << " endpont 2 = " << 
-                e.get_endpoint2() << " weight = " << e.get_weight() << std::endl;
-        }
-    }
+
+    g.removeVertex("1");
+    vertexV = g.get_vertices();
+    adjl = g.get_adjacency_list();
+    printVerticies(vertexV);
+    printEdges(adjl);
 
     return 0;
 }
