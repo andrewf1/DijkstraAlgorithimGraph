@@ -12,14 +12,17 @@ void Graph::addVertex(std::string label) {
     adjacency_list.push_back(p);
 }
 
-void Graph::removeVertex(std::string label) { 
+void Graph::removeVertex(std::string label) {
+    std::cout << "entered remove vertex" << std::endl;
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
         if (*(v->first) == label) { // erase the entire vertex and its edges in the adjacency list
             adjacency_list.erase(v);
+            std::cout << "just erased the vertex" << std::endl;
         }
         else { // erase the vertex every time it appears as an endpoint for every other vertex
             for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
                 if ((e->get_endpoint2() == label) || (e->get_endpoint1() == label))  {
+                    std::cout << "about to erase the edge that includes the removed vertex" << std::endl;
                     (v->second).erase(e);
                 }
             }
@@ -36,7 +39,7 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
         }
     }
 
-    // for (auto v : adjacency_list) {
+    // for (auto v : adjacency_list) { WHY DOES THIS NOT WORK111111111111111111111111
     //     if ((*(v.first) == label1) || (*(v.first) == label2)) {
     //         (v.second).push_back(e);
     //     }
