@@ -33,6 +33,7 @@ int main() {
 
 
     g.removeVertex("1");
+    std::cout << "removed a vertex" << std::endl;
     adjl = g.get_adjacency_list();
     printGraph(adjl);
 
