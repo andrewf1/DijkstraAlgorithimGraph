@@ -34,7 +34,7 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
         if (*(v.first) == label1) {
             (v.second).push_back(e);
         }
-        else if(*(v.first) == label2) {
+        if(*(v.first) == label2) {
             (v.second).push_back(e);
         }
     }
