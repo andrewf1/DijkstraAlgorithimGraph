@@ -1,5 +1,10 @@
 #include "Graph.hpp"
 
+bool Edge::operator==(const Edge& rhs) {
+    return ((this->get_endpoint1() == rhs.get_endpoint1())
+        && (this->get_endpoint2() == rhs.get_endpoint2()));
+
+}
 void Graph::addVertex(std::string label) {
     Vertex v{label};
     vertices.push_back(v);
