@@ -1,5 +1,6 @@
 #include "GraphBase.hpp"
 #include <list>
+#include <iostream>
 
 class Edge {
 public:
@@ -30,7 +31,7 @@ public:
     Graph() = default;
     ~Graph() = default;
 
-    int size() { return vertices.size(); } // number of verticies in graph
+    int size() { return adjacency_list.size(); } // number of verticies in graph
 
     virtual void addVertex(std::string label); //inserts a new vertex storing the element
     virtual void removeVertex(std::string label);  // remove vertex containing the element and all its incident edges
@@ -38,10 +39,12 @@ public:
     virtual void removeEdge(std::string label1, std::string label2); // remove the edge between the two vertices given
     virtual unsigned long shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path);
 
-    std::vector<Vertex> get_vertices() const { return vertices; } // returns a vertex list of all the vertices of the graph
-    std::vector<std::list<Edge>> get_adjacency_list() const { return adjacency_list; } //returns an edge list of all the edges of the graph
+    // std::vector<Vertex> get_vertices() const { return vertices; } // returns a vertex list of all the vertices of the graph
+    // gets the list of vector, edge list pairs
+    std::vector<std::pair<Vertex, std::list<Edge>>> get_adjacency_list() const { return adjacency_list; } 
     
 private:
-    std::vector<std::list<Edge>> adjacency_list;
-    std::vector<Vertex> vertices;
+    std::vector<std::pair<Vertex, std::list<Edge>>> adjacency_list;
+    // std::vector<std::list<Edge>> adjacency_list;
+    // std::vector<Vertex> vertices;
 };

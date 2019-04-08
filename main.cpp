@@ -1,19 +1,12 @@
 #include "Graph.hpp"
 #include <iostream>
 
-void printVerticies(std::vector<Vertex> vertexV) {
-    std::cout << "VERTEXES ARE: " << std::endl;
-    for (auto v : vertexV) {
-        std::cout << *v << std::endl;
-    }
-}
-
-void printEdges(std::vector<std::list<Edge>> adjl) {
-    std::cout << "Edges are: " << std::endl;
-    for (auto l :adjl) {
-        for (auto e : l) {
-            std::cout << "Vertex: " << e.get_endpoint1() << " endpoint = " << 
-            e.get_endpoint2() << " weight = " << e.get_weight() << std::endl;
+void printGraph(std::vector<std::pair<Vertex, std::list<Edge>>> adjl) {
+    for (auto v : adjl) {
+        std::cout << "Vertex " << *(v.first) << ": ";
+        for (auto e : v.second) {
+            std::cout << '[' << e.get_endpoint1() << ", " << e.get_endpoint2() << " (" << e.get_weight() 
+            << ")]->";
         }
         std::cout << std::endl;
     }
@@ -35,18 +28,13 @@ int main() {
 
     std::cout << "called all addVertex and addEdge" << std::endl;
 
-    auto vertexV = g.get_vertices();
     auto adjl = g.get_adjacency_list();
-
-    printVerticies(vertexV);
-    printEdges(adjl);
+    printGraph(adjl);
 
 
     g.removeVertex("1");
-    vertexV = g.get_vertices();
     adjl = g.get_adjacency_list();
-    printVerticies(vertexV);
-    printEdges(adjl);
+    printGraph(adjl);
 
     return 0;
 }
