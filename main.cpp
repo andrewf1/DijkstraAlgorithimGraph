@@ -8,7 +8,7 @@ void printGraph(std::vector<std::pair<Vertex, std::list<Edge>>> adjl) {
             std::cout << '[' << e.get_endpoint1() << ", " << e.get_endpoint2() << " (" << e.get_weight() 
             << ")]->";
         }
-        std::cout << std::endl;
+        std::cout << '/' << std::endl;
     }
 }
 
