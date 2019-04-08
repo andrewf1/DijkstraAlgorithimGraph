@@ -60,6 +60,7 @@ void Graph::removeEdge(std::string label1, std::string label2) {
                         std::cout << "inside inner most if and about to erase" << std::endl;
                         (v->second).erase(e);
                         std::cout << "just erased the edge" << std::endl;
+                        break;
                     }
             }
         }
