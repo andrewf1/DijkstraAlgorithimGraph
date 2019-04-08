@@ -23,9 +23,11 @@ void Graph::removeVertex(std::string label) {
             for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
                 if ((e->get_endpoint2() == label) || (e->get_endpoint1() == label))  {
                     std::cout << "about to erase the edge that includes the removed vertex" << std::endl;
-                    (v->second).erase(e);
-                    std::cout << "just erased it";
-                    break;
+                    removeEdge(e->get_endpoint1(), e->get_endpoint2());
+                    removeEdge(e->get_endpoint2(), e->get_endpoint1());
+                    // (v->second).erase(e);
+                    // std::cout << "just erased it";
+                    // break;
                 }
             }
         }
