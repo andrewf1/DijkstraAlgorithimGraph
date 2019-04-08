@@ -24,6 +24,8 @@ void Graph::removeVertex(std::string label) {
                 if ((e->get_endpoint2() == label) || (e->get_endpoint1() == label))  {
                     std::cout << "about to erase the edge that includes the removed vertex" << std::endl;
                     (v->second).erase(e);
+                    std::cout << "just erased it";
+                    break;
                 }
             }
         }
