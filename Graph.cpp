@@ -16,20 +16,25 @@ void Graph::removeVertex(std::string label) {
     std::cout << "entered remove vertex" << std::endl;
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
         if (*(v->first) == label) { // erase the entire vertex and its edges in the adjacency list
+            //BEFORE WE CALL .ERASE WE SHOULD CALL REMOVE EDGE FOR ALL THE EDGES OF THIS BC THAT
+            // WILL JUST CALL DELETE FOR ALL THE EDGES THAT WAS CONNECTED TO THE VERTEX
+            for (auto e : (v->second)) {
+                removeEdge(e.get_endpoint1(), e.get_endpoint2());
+            }
             adjacency_list.erase(v);
             std::cout << "just erased the vertex" << std::endl;
         }
-        else { // erase the vertex every time it appears as an endpoint for every other vertex
-            for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
-                if ((e->get_endpoint2() == label) || (e->get_endpoint1() == label))  {
-                    std::cout << "about to erase the edge that includes the removed vertex" << std::endl;
-                    removeEdge(e->get_endpoint1(), e->get_endpoint2());
-                    // (v->second).erase(e);
-                    // std::cout << "just erased it";
-                    // break;
-                }
-            }
-        }
+        // else { // erase the vertex every time it appears as an endpoint for every other vertex
+        //     for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
+        //         if ((e->get_endpoint2() == label) || (e->get_endpoint1() == label))  {
+        //             std::cout << "about to erase the edge that includes the removed vertex" << std::endl;
+        //             removeEdge(e->get_endpoint1(), e->get_endpoint2());
+        //             // (v->second).erase(e);
+        //             // std::cout << "just erased it";
+        //             // break;
+        //         }
+        //     }
+        // }
     }
 }
 
