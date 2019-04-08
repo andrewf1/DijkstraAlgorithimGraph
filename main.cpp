@@ -15,6 +15,8 @@ int main() {
     for (const auto label : vertices1) g.addVertex(label);
     for (const auto &e : edges1) g.addEdge(e.a, e.b, e.w);
 
+    std::cout << "called all addVertex and addEdge" << std::endl;
+
     auto vertexV = g.get_vertices();
     auto adjl = g.get_adjacency_list();
 

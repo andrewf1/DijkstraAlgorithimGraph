@@ -19,6 +19,7 @@ void Graph::removeVertex(std::string label) {
             break;
         }
     }
+    index -= 1; // decrementing index by 1 to match actual index of vertex
 
     // erasing the vertex from the adjacency list
     auto element_to_erase = adjacency_list.begin() + index;
@@ -37,13 +38,26 @@ void Graph::removeVertex(std::string label) {
 void Graph::addEdge(std::string label1, std::string label2, unsigned long weight) {
     Edge e{label1, label2, weight};
 
-    for (unsigned int i = 0; i < vertices.size(); i++) {
-        auto v = vertices.at(i);
-        if (*v == label1) {
-            adjacency_list.at(i).push_back(e);
-            break;
-        }
-    }
+    std::list<Edge> tempList;
+    tempList.push_back(e);
+    adjacency_list.push_back(tempList);
+    // have to sort the adjacency_list to reflect the indexes of the vertices vector
+
+    // if (adjacency_list.empty()) {
+    //     std::list<Edge> temp;
+    //     temp.push_back(e);
+    //     adjacency_list.push_back(temp);
+    // }
+
+    // for (unsigned int i = 0; i < vertices.size(); i++) {
+    //     auto v = vertices.at(i);
+    //     if (*v == label1) {
+    //         // accessing an element that does not exist in adjacency_list
+    //         adjacency_list.at(i).push_back(e);
+    //         break;
+    //     }
+    // }
+    
 }
 
 void Graph::removeEdge(std::string label1, std::string label2) {
