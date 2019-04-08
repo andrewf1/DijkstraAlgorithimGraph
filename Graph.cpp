@@ -22,7 +22,7 @@ void Graph::removeVertex(std::string label) {
     for (auto list : adjacency_list) {
         for (auto edge : list) {
             // removes the edge containing the vertex that was removeod
-            if ((edge.get_endpoint1() == label) || (edge.get_endpoint2 == label)) {
+            if ((edge.get_endpoint1() == label) || (edge.get_endpoint2() == label)) {
                 list.remove(edge);
             }
         }
