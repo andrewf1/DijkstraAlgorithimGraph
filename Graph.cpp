@@ -15,7 +15,7 @@ void Graph::addVertex(std::string label) {
 void Graph::removeVertex(std::string label) {
     std::cout << "entered remove vertex" << std::endl;
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
-        if (*(v->first) == label) { // erase the entire vertex and its edges in the adjacency list
+        if (*(v->first) == label) { 
             //BEFORE WE CALL .ERASE WE SHOULD CALL REMOVE EDGE FOR ALL THE EDGES OF THIS BC THAT
             // WILL JUST CALL DELETE FOR ALL THE EDGES THAT WAS CONNECTED TO THE VERTEX
             for (auto e : (v->second)) {
@@ -56,19 +56,22 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
 
 void Graph::removeEdge(std::string label1, std::string label2) {
     std::cout << "inside remove edge" << std::endl;
+    int i = 0;
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
+        std::cout << ++i << " time in the loop." << std::endl;
         if ((*(v->first) == label1) || (*(v->first) == label2)) {
             std::cout << "found the vertex" << std::endl;
             for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
-                if (((e->get_endpoint1() == label1) && (e->get_endpoint2() == label2))
-                    || ((e->get_endpoint1() == label2 && (e->get_endpoint2() == label1)))) {
+                if (((e->get_endpoint1() == label1) && (e->get_endpoint2() == label2)) || 
+                    ((e->get_endpoint1() == label2 && (e->get_endpoint2() == label1)))) {
                         std::cout << "inside inner most if and about to erase" << std::endl;
                         (v->second).erase(e);
                         std::cout << "just erased the edge" << std::endl;
-                        break;
+                        break; // break out of this for loop and go to the next vertex to check
                     }
             }
         }
+        std::cout << "at end of first loop" << std::endl;
     }
     // for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
     //     if (*(v->first) == label1) {
