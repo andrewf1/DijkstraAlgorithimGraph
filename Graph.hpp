@@ -6,7 +6,7 @@ class Edge {
 public:
     Edge(std::string label1, std::string label2, unsigned long _weight) :
         endpoint1{label1}, endpoint2{label2}, weight{_weight} {}
-    // bool operator==(const Edge& lhs);
+    bool operator==(const Edge& lhs);
     std::string get_endpoint1() const { return endpoint1; }
     std::string get_endpoint2() const { return endpoint2; }
     unsigned long get_weight() const { return weight; }

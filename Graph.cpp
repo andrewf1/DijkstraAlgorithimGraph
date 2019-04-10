@@ -1,10 +1,12 @@
 #include "Graph.hpp"
 
-// bool Edge::operator==(const Edge& rhs) {
-//     return ((this->get_endpoint1() == rhs.get_endpoint1())
-//         && (this->get_endpoint2() == rhs.get_endpoint2()));
+bool Edge::operator==(const Edge& rhs) {
+    return (((this->get_endpoint1() == rhs.get_endpoint1())
+        && (this->get_endpoint2() == rhs.get_endpoint2()))
+        || ((this->get_endpoint1() == rhs.get_endpoint2())
+        && (this->get_endpoint2() == rhs.get_endpoint1())));
 
-// }
+}
 void Graph::addVertex(std::string label) {
     Vertex v{label};
     std::list<Edge> emptyList;
