@@ -70,8 +70,9 @@ void Graph::removeEdge(std::string label1, std::string label2) {
                 std::cout << "label2 = " << label2 << std::endl;
                 bool e1 = e->get_endpoint1() == label1;
                 std::cout << "e1 = " << e1 << std::endl;
-                if ((e->get_endpoint1() == label1) || (e->get_endpoint1() == label2) ||
-                    (e->get_endpoint2() == label1) || (e->get_endpoint2() == label2)) { // if the vertex appears at all 
+                if (((e->get_endpoint1() == label1) || (e->get_endpoint1() == label2)) ||
+                    ((e->get_endpoint2() == label1) || (e->get_endpoint2() == label2))) { // if the vertex appears at all 
+                        std::cout << "inside this stupid fucking if statement" << std::endl;
                         (v->second).erase(e); //remove it
                         // removed the edge
                         break; // finished with this
