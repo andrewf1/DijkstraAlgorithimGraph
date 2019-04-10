@@ -62,13 +62,18 @@ void Graph::removeEdge(std::string label1, std::string label2) {
         if ((*(v->first) == label1) || (*(v->first) == label2)) {
             std::cout << "found the vertex" << std::endl;
             for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
-                if (((e->get_endpoint1() == label1) && (e->get_endpoint2() == label2)) || 
-                    ((e->get_endpoint1() == label2 && (e->get_endpoint2() == label1)))) {
-                        std::cout << "inside inner most if and about to erase" << std::endl;
-                        (v->second).erase(e);
-                        std::cout << "just erased the edge" << std::endl;
-                        break; // break out of this for loop and go to the next vertex to check
-                    }
+                if ((e->get_endpoint1() == label1) || (e->get_endpoint1() == label2) ||
+                    (e->get_endpoint2() == label1) || (e->get_endpoint2() == label2)) { // if the vertex appears at all 
+                        (v->second).erase(e); //remove it
+                    break; // finished with this
+                }
+                // if (((e->get_endpoint1() == label1) && (e->get_endpoint2() == label2)) || 
+                //     ((e->get_endpoint1() == label2 && (e->get_endpoint2() == label1)))) {
+                //         std::cout << "inside inner most if and about to erase" << std::endl;
+                //         (v->second).erase(e);
+                //         std::cout << "just erased the edge" << std::endl;
+                //         break; // break out of this for loop and go to the next vertex to check
+                //     }
             }
         }
         std::cout << "at end of first loop" << std::endl;
