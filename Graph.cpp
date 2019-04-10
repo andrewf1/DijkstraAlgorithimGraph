@@ -74,6 +74,7 @@ void Graph::removeEdge(std::string label1, std::string label2) {
                     ((e->get_endpoint2() == label1) || (e->get_endpoint2() == label2))) { // if the vertex appears at all 
                         std::cout << "inside this stupid fucking if statement" << std::endl;
                         (v->second).erase(e); //remove it
+                        std::cout << "just erased this edge" << std::endl;
                         // removed the edge
                         // break; // finished with this //NO WE CANT HAVE THIS BC OF THE CASE WHEN IT IS THE VERTEX
                 }
