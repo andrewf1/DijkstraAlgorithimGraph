@@ -2,7 +2,7 @@
 #include <list>
 #include <iostream>
 
-class Edge {
+class Edge { // just o0ne endpoint
 public:
     Edge(std::string label1, std::string label2, unsigned long _weight) :
         endpoint1{label1}, endpoint2{label2}, weight{_weight} {}
