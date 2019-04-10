@@ -59,7 +59,7 @@ void Graph::removeEdge(std::string label1, std::string label2) {
     std::cout << "inside remove edge" << std::endl;
     int i = 0; // just for debugging purposes
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
-        std::cout << ++i << " time in the loop." << std::endl;
+        std::cout << ++i << " time in the first loop." << std::endl;
         if ((*(v->first) == label1) || (*(v->first) == label2)) {
             std::cout << "found the vertex" << std::endl;
             for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
@@ -68,10 +68,13 @@ void Graph::removeEdge(std::string label1, std::string label2) {
                 std::cout << "label1 = " << label1 << std::endl;
                 std::cout << "endpoint2 = " << e->get_endpoint2() << std::endl;
                 std::cout << "label2 = " << label2 << std::endl;
+                bool e1 = e->get_endpoint1() == label1;
+                std::cout << "e1 = " << e1 << std::endl;
                 if ((e->get_endpoint1() == label1) || (e->get_endpoint1() == label2) ||
                     (e->get_endpoint2() == label1) || (e->get_endpoint2() == label2)) { // if the vertex appears at all 
                         (v->second).erase(e); //remove it
-                    break; // finished with this
+                        // removed the edge
+                        break; // finished with this
                 }
                 // if (((e->get_endpoint1() == label1) && (e->get_endpoint2() == label2)) || 
                 //     ((e->get_endpoint1() == label2 && (e->get_endpoint2() == label1)))) {
