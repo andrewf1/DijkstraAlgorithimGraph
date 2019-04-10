@@ -62,6 +62,9 @@ void Graph::removeEdge(std::string label1, std::string label2) {
         if ((*(v->first) == label1) || (*(v->first) == label2)) {
             std::cout << "found the vertex" << std::endl;
             for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
+                std::cout << "vertex = " << *(v->first) << std::endl;
+                std::cout << "endpoint1 = " << e->get_endpoint1() << std::endl;
+                std::cout << "endpoint2 = " << e->get_endpoint2() << std::endl;
                 if ((e->get_endpoint1() == label1) || (e->get_endpoint1() == label2) ||
                     (e->get_endpoint2() == label1) || (e->get_endpoint2() == label2)) { // if the vertex appears at all 
                         (v->second).erase(e); //remove it
