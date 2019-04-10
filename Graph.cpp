@@ -18,11 +18,12 @@ void Graph::removeVertex(std::string label) {
         if (*(v->first) == label) { 
             //BEFORE WE CALL .ERASE WE SHOULD CALL REMOVE EDGE FOR ALL THE EDGES OF THIS BC THAT
             // WILL JUST CALL DELETE FOR ALL THE EDGES THAT WAS CONNECTED TO THE VERTEX
-            for (auto e : (v->second)) {
+            for (auto e : (v->second)) { //calling this for every edge at the vertex
                 removeEdge(e.get_endpoint1(), e.get_endpoint2());
             }
             adjacency_list.erase(v);
             std::cout << "just erased the vertex" << std::endl;
+            break; //found the vertex and erased everything, can break the loop the job is finished
         }
         // else { // erase the vertex every time it appears as an endpoint for every other vertex
         //     for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
@@ -56,7 +57,7 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
 
 void Graph::removeEdge(std::string label1, std::string label2) {
     std::cout << "inside remove edge" << std::endl;
-    int i = 0;
+    int i = 0; // just for debugging purposes
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
         std::cout << ++i << " time in the loop." << std::endl;
         if ((*(v->first) == label1) || (*(v->first) == label2)) {
@@ -64,7 +65,9 @@ void Graph::removeEdge(std::string label1, std::string label2) {
             for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
                 std::cout << "vertex = " << *(v->first) << std::endl;
                 std::cout << "endpoint1 = " << e->get_endpoint1() << std::endl;
+                std::cout << "label1 = " << label1 << std::endl;
                 std::cout << "endpoint2 = " << e->get_endpoint2() << std::endl;
+                std::cout << "label2 = " << label2 << std::endl;
                 if ((e->get_endpoint1() == label1) || (e->get_endpoint1() == label2) ||
                     (e->get_endpoint2() == label1) || (e->get_endpoint2() == label2)) { // if the vertex appears at all 
                         (v->second).erase(e); //remove it
