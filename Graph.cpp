@@ -48,14 +48,14 @@ void Graph::removeVertex(std::string label) {
 void Graph::addEdge(std::string label1, std::string label2, unsigned long weight) {
     Edge* vertex_edge = new Edge(label2, weight);
     Edge* endpoint_edge = new Edge(label1, weight);
-    for (auto v : adjacency_list) {
-        if (*v == label1) {
-            std::cout << "v = " << *v << ", ep = " << vertex_edge->get_endpoint() << ", w = " << vertex_edge->get_weight() << std::endl;    
-            v.push_back_edge(vertex_edge); 
+    for (unsigned int i = 0; i < adjacency_list.size(); i++) {
+        if (*adjacency_list.at(i) == label1) {
+            std::cout << "v = " << *adjacency_list.at(i) << ", ep = " << vertex_edge->get_endpoint() << ", w = " << vertex_edge->get_weight() << std::endl;    
+            adjacency_list.at(i).push_back_edge(vertex_edge); 
         }
-        else if (*v == label2) {
-            std::cout << "v = " << *v << ", ep = " << vertex_edge->get_endpoint() << ", w = " << vertex_edge->get_weight() << std::endl;    
-            v.push_back_edge(endpoint_edge);
+        else if (*adjacency_list.at(i) == label2) {
+            std::cout << "v = " << *adjacency_list.at(i) << ", ep = " << endpoint_edge->get_endpoint() << ", w = " << endpoint_edge->get_weight() << std::endl;    
+            adjacency_list.at(i).push_back_edge(endpoint_edge);
         }
     }
     /*Edge e{label1, label2, weight};
