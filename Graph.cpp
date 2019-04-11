@@ -173,6 +173,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
         unsigned long temp_dist = distance + edge->get_weight();
         if (checkPath(*curr_vertex, endLabel)) {
             std::cout << "checkPath returned true" << std::endl;
+            std::cout << "temp_dist = " << temp_dist << ", distance = " << distance << std::endl;
             if (temp_dist < distance || first_time) {
                 std::cout << "it is the first time running or temp_dist < distance" << std::endl;
                 first_time = false;
