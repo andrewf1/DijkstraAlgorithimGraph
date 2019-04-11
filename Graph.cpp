@@ -148,6 +148,9 @@ unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned lo
 // }
 
 //Dijkstra's Algorithm
+
+// man scratch this and start over, it is not working, we are getting the smallest weighted edge, not necessarily
+//the one that is going to reach the path with least weight eventually (check 1 -> 6)
 unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path) {
     std::cout << "start vertex = " << startLabel << " and end vertex = " << endLabel << std::endl;
     //use recursion
