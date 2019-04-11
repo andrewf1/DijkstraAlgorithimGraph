@@ -178,6 +178,9 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                 distance = temp_dist;
                 next_vertex = edge->get_endpoint();
                 std::cout << "next_vertex is now set to: " << edge->get_endpoint() << std::endl;
+                if(edge->get_endpoint() == endLabel) {
+                    return distance;
+                }
             }
         // }
     }
