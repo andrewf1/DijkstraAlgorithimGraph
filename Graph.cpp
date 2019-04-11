@@ -17,21 +17,16 @@ void Graph::addVertex(std::string label) {
 void Graph::removeVertex(std::string label) {
     unsigned int i = 0;
     while (i < adjacency_list.size()) {
-        std::cout << "i = " << i << ", alist size = " << adjacency_list.size() << std::endl;
-        std::cout << "in for loop, vertex = " << *adjacency_list.at(i) << std::endl;
         if (*adjacency_list.at(i) == label) {
             auto pos_to_delete = adjacency_list.begin() + i;
             adjacency_list.erase(pos_to_delete);
-            std::cout << "just deleted that vertex from alist" << std::endl;
         }
         else {
             auto elist = adjacency_list.at(i).get_edge_list();
             for (auto e = elist.begin(); e != elist.end(); e++) {
                 auto edge = *e;
-                std::cout << "\tedge endpoint = " << edge->get_endpoint() << std::endl;
                 if(edge->get_endpoint() == label) {
                     adjacency_list.at(i).remove_edge(edge);
-                    std::cout << "\tremoved the edge with that endpoint" << std::endl;
                 }
             }
             i++; //increment i
@@ -67,11 +62,9 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
     Edge* endpoint_edge = new Edge(label1, weight);
     for (unsigned int i = 0; i < adjacency_list.size(); i++) {
         if (*adjacency_list.at(i) == label1) {
-            std::cout << "v = " << *adjacency_list.at(i) << ", ep = " << vertex_edge->get_endpoint() << ", w = " << vertex_edge->get_weight() << std::endl;    
             adjacency_list.at(i).push_back_edge(vertex_edge); 
         }
         else if (*adjacency_list.at(i) == label2) {
-            std::cout << "v = " << *adjacency_list.at(i) << ", ep = " << endpoint_edge->get_endpoint() << ", w = " << endpoint_edge->get_weight() << std::endl;    
             adjacency_list.at(i).push_back_edge(endpoint_edge);
         }
     }
