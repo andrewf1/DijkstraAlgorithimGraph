@@ -4,15 +4,15 @@
 
 class Edge { // just o0ne endpoint
 public:
-    Edge(std::string label1, std::string label2, unsigned long _weight) :
-        endpoint1{label1}, endpoint2{label2}, weight{_weight} {}
-    bool operator==(const Edge& lhs);
-    std::string get_endpoint1() const { return endpoint1; }
-    std::string get_endpoint2() const { return endpoint2; }
+    Edge(std::string label1, unsigned long _weight) :
+        endpoint{label1}, weight{_weight} {}
+    // bool operator==(const Edge& lhs);
+    std::string get_endpoint() const { return endpoint; }
+    // std::string get_endpoint2() const { return endpoint2; }
     unsigned long get_weight() const { return weight; }
 private:
-    std::string endpoint1;
-    std::string endpoint2;
+    std::string endpoint/*1*/;
+    // std::string endpoint2;
     unsigned long weight;
 };
 
@@ -23,6 +23,7 @@ public:
     bool isAdjacentTo(Vertex v);
 private:
     std::string data;
+    std::vector<Edge*> edge_list;
 };
 
 class Graph : public GraphBase {
@@ -39,8 +40,9 @@ public:
     virtual void removeEdge(std::string label1, std::string label2); // remove the edge between the two vertices given
     virtual unsigned long shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path);
 
-    std::vector<std::pair<Vertex, std::list<Edge>>> get_adjacency_list() const { return adjacency_list; } 
+    std::vector<Vertex> get_adjacency_list() const { return adjacency_list; } 
     
 private:
-    std::vector<std::pair<Vertex, std::list<Edge>>> adjacency_list;
+    // std::vector<std::pair<Vertex, std::list<Edge>>> adjacency_list;
+    std::vector<Vertex> adjacency_list;
 };

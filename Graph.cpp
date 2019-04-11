@@ -7,13 +7,20 @@
 // }
 void Graph::addVertex(std::string label) {
     Vertex v{label};
+    adjacency_list.push_back(v);
+/*    Vertex v{label};
     std::list<Edge> emptyList;
     auto p = std::make_pair(v, emptyList);
-    adjacency_list.push_back(p);
+    adjacency_list.push_back(p); */
 }
 
 void Graph::removeVertex(std::string label) {
-    std::cout << "entered remove vertex" << std::endl;
+    for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
+        if (*(*v) == label) {
+            adjacency_list.erase(v);
+        }
+    }
+/*    std::cout << "entered remove vertex" << std::endl;
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
         if (*(v->first) == label) { // erase the entire vertex and its edges in the adjacency list
             //BEFORE WE CALL .ERASE WE SHOULD CALL REMOVE EDGE FOR ALL THE EDGES OF THIS BC THAT
@@ -23,7 +30,7 @@ void Graph::removeVertex(std::string label) {
             }
             adjacency_list.erase(v);
             std::cout << "just erased the vertex" << std::endl;
-        }
+        } 
         // else { // erase the vertex every time it appears as an endpoint for every other vertex
         //     for (auto e = (v->second).begin(); e != (v->second).end(); e++) {
         //         if ((e->get_endpoint2() == label) || (e->get_endpoint1() == label))  {
@@ -35,17 +42,24 @@ void Graph::removeVertex(std::string label) {
         //         }
         //     }
         // }
-    }
+    }*/
 }
 
 void Graph::addEdge(std::string label1, std::string label2, unsigned long weight) {
-    Edge e{label1, label2, weight};
+    Edge vertex_edge {label2, weight};
+    Edge endpoint_edge {label1, weight};
+    for (auto v : adjacency_list) {
+        if((*v == label1) || (*v == label2)) {
+            
+        }
+    }
+    /*Edge e{label1, label2, weight};
 
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
         if ((*(v->first) == label1) || (*(v->first) == label2)) {
             (v->second).push_back(e);
         }
-    }
+    }*/
 
     // for (auto v : adjacency_list) { WHY DOES THIS NOT WORK111111111111111111111111
     //     if ((*(v.first) == label1) || (*(v.first) == label2)) {
@@ -55,7 +69,7 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
 }
 
 void Graph::removeEdge(std::string label1, std::string label2) {
-    std::cout << "inside remove edge" << std::endl;
+    /*std::cout << "inside remove edge" << std::endl;
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
         if ((*(v->first) == label1) || (*(v->first) == label2)) {
             std::cout << "found the vertex" << std::endl;
@@ -69,7 +83,7 @@ void Graph::removeEdge(std::string label1, std::string label2) {
                     }
             }
         }
-    }
+    }*/
     // for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
     //     if (*(v->first) == label1) {
     //         for (auto e = (v->second).begin(); e != (v->second).end(); v++) {
@@ -86,7 +100,7 @@ void Graph::removeEdge(std::string label1, std::string label2) {
     //                 break;
     //             }
     //         }
-    //     }git
+}
 //Dijkstra's Algorithm
 unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path) {
     //use recursion
