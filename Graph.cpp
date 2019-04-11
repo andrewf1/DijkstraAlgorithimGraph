@@ -95,7 +95,6 @@ unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned lo
                 return edge->get_weight() + curr_weight;
             }
         }
-        return weight;
     }
     else {
         for (unsigned int i = 0; i < path.size(); i++) {
@@ -113,6 +112,7 @@ unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned lo
         }
         calculate_weight(new_path, weight);
     }        
+    return weight;
 }
 
 //     for (unsigned int i = 0; i < path.size(); i++) {
