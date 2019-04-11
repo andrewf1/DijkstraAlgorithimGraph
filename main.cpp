@@ -49,8 +49,8 @@ int main() {
     adjl = g.get_adjacency_list();
     printGraph(adjl);
     std::cout << std::endl;
-    g.removeEdge("4", "2");
-    g.removeEdge("3", "6");
+    g.removeEdge("2", "4");
+    g.removeEdge("6", "3");
     adjl = g.get_adjacency_list();
     printGraph(adjl);
 
