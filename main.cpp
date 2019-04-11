@@ -38,18 +38,27 @@ int main() {
     for (const auto label : vertices1) g.addVertex(label);
     for (const auto &e : edges1) g.addEdge(e.a, e.b, e.w);
 
-    auto adjl = g.get_adjacency_list();
-    printGraph(adjl);
-    std::cout << std::endl;
-    g.removeVertex("1");
-    adjl = g.get_adjacency_list();
-    printGraph(adjl);
-    std::cout << std::endl;
-    g.removeEdge("1", "2");
-    g.removeEdge("6", "1");
-    g.removeEdge("2", "4");
-    adjl = g.get_adjacency_list();
-    printGraph(adjl);
+    // auto adjl = g.get_adjacency_list();
+    // printGraph(adjl);
+    // std::cout << std::endl;
+    // g.removeVertex("1");
+    // adjl = g.get_adjacency_list();
+    // printGraph(adjl);
+    // std::cout << std::endl;
+    // g.removeEdge("1", "2");
+    // g.removeEdge("6", "1");
+    // g.removeEdge("2", "4");
+    // adjl = g.get_adjacency_list();
+    // printGraph(adjl);
+
+    std::vector<std::string> path;
+    if(g.shortestPath("3", "6", path) == 2) {
+        std::cout << "did something right" << std::endl;
+    }
+
+    if (g.shortestPath("1", "5", path) == 20) {
+        std::cout << "did another something right" << std::endl;
+    }
 
     return 0;
 }
