@@ -20,9 +20,11 @@ void Dijkstra::createTable() {
         }
     }
     std::cout << "-----------------------------------" << std::endl;
+    std::cout << "about to enter main while loop" << std::endl;
     while (!unvisited.empty()) {
         dRow* current_vertex = new dRow;
         current_vertex = &table.at(0);
+        std::cout << "current vertex = " << *(current_vertex->v) << std::endl;
         for (unsigned int i = 0; i < table.size(); i++) {
             if(table.at(i).visited != true) {
                 dRow* tempVertex = new dRow;
