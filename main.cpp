@@ -43,11 +43,11 @@ int main() {
     auto adjl = g.get_adjacency_list();
     printGraph(adjl);
 
-    // std::cout << "about to remove a vertex" << std::endl;
-    // g.removeVertex("1");
-    // std::cout << "removed a vertex" << std::endl;
-    // adjl = g.get_adjacency_list();
-    // printGraph(adjl);
+    std::cout << "about to remove a vertex" << std::endl;
+    g.removeVertex("1");
+    std::cout << "removed a vertex" << std::endl;
+    adjl = g.get_adjacency_list();
+    printGraph(adjl);
 
     return 0;
 }

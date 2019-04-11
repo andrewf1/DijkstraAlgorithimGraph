@@ -21,6 +21,7 @@ public:
     Vertex(std::string held = "") : data{held} {};
     std::string operator*() { return data; }; //return element at vertex
     void push_back_edge(Edge* e) { edge_list.push_back(e); }
+    void erase_edge(std::list<Edge*>::iterator e) { edge_list.erase(e); }
     std::list<Edge*> get_edge_list() { return edge_list; }
     bool isAdjacentTo(Vertex v);
 private:
