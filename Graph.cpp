@@ -16,7 +16,7 @@ void Graph::addVertex(std::string label) {
 
 void Graph::removeVertex(std::string label) {
     for (unsigned int i = 0; i < adjacency_list.size(); i++) {
-        std::cout << "i = " << i << std::endl;
+        std::cout << "i = " << i << ", alist size = " << adjacency_list.size() << std::endl;
         std::cout << "in for loop, vertex = " << *adjacency_list.at(i) << std::endl;
         if (*adjacency_list.at(i) == label) {
             auto pos_to_delete = adjacency_list.begin() + i;
