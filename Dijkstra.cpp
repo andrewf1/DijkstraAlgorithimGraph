@@ -4,16 +4,22 @@ const unsigned long infinity = 4294967295;
 
 void Dijkstra::createTable() {
     auto startVertex = unvisited.at(0);
+    std::cout << "start vertex = " << *startVertex << std::endl;
     for (unsigned int i = 0; i < unvisited.size(); i++) {
+        std::cout << "i = " << i << std::endl;
+        std::cout << "*unvisited.at(i) = " << *unvisited.at(i) << std::endl;
         if (i == 0) {
             dRow startRow {*unvisited.at(i), 0, Vertex()};
+            std::cout << "push back the startRow into the table" << std::endl;
             table.push_back(startRow);
         }
         else {
             dRow row {*unvisited.at(i), infinity, Vertex()};
+            std::cout << "push back the row into the table" << std::endl;
             table.push_back(row);
         }
     }
+    std::cout << "-----------------------------------" << std::endl;
     while (!unvisited.empty()) {
         dRow* current_vertex = new dRow;
         current_vertex = &table.at(0);
@@ -56,5 +62,5 @@ void Dijkstra::createTable() {
 }
 
 unsigned long Dijkstra::getShortestPath(std::string v1, std::string v2, std::vector<std::string> &path) {
-
+    return 0;
 }
