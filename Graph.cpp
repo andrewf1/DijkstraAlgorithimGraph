@@ -108,7 +108,9 @@ void Graph::removeEdge(std::string label1, std::string label2) {
                     break;
                 }
             }
-            e++; //incrementing the iterator     
+            else {
+                e++; //incrementing the iterator     
+            }
         }
     }
     /*std::cout << "inside remove edge" << std::endl;

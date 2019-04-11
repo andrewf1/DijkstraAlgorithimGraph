@@ -48,7 +48,7 @@ int main() {
     std::cout << "removed a vertex" << std::endl;
     adjl = g.get_adjacency_list();
     printGraph(adjl);
-
+    std::cout << std::endl;
     g.removeEdge("4", "2");
     g.removeEdge("3", "6");
     adjl = g.get_adjacency_list();
