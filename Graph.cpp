@@ -92,9 +92,11 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
 
 void Graph::removeEdge(std::string label1, std::string label2) {
     for (unsigned int i = 0; i < adjacency_list.size(); i++) {
+        std::cout << "for loop" << std::endl;
         auto elist = adjacency_list.at(i).get_edge_list();
         auto e = elist.begin();
         while (e != elist.end()) {
+            std::cout << "while loop" << std::endl;
             auto edge = *e;
             if(*adjacency_list.at(i) == label1) {
                 if (edge->get_endpoint() == label2) {
@@ -108,9 +110,7 @@ void Graph::removeEdge(std::string label1, std::string label2) {
                     break;
                 }
             }
-            else {
-                e++; //incrementing the iterator     
-            }
+            e++; //incrementing the iterator     
         }
     }
     /*std::cout << "inside remove edge" << std::endl;
