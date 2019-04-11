@@ -2,17 +2,14 @@
 #include <list>
 #include <iostream>
 
-class Edge { // just o0ne endpoint
+class Edge { 
 public:
     Edge(std::string label1, unsigned long _weight) :
         endpoint{label1}, weight{_weight} {}
-    // bool operator==(const Edge& lhs);
     std::string get_endpoint() const { return endpoint; }
-    // std::string get_endpoint2() const { return endpoint2; }
     unsigned long get_weight() const { return weight; }
 private:
-    std::string endpoint/*1*/;
-    // std::string endpoint2;
+    std::string endpoint;
     unsigned long weight;
 };
 
@@ -33,7 +30,7 @@ class Graph : public GraphBase {
 public:
     //change these later
     Graph() = default;
-    ~Graph() = default;
+    ~Graph() = default; //especially this one
 
     int size() { return adjacency_list.size(); } // number of verticies in graph
 
