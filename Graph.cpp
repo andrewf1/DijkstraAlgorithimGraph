@@ -15,16 +15,17 @@ void Graph::addVertex(std::string label) {
 }
 
 void Graph::removeVertex(std::string label) {
-    for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
-        if (*(*v) == label) {
-            adjacency_list.erase(v);
+    for (unsigned int i = 0; i < adjacency_list.size(); i++) {
+        if (*adjacency_list.at(i) == label) {
+            auto pos_to_delete = adjacency_list.begin() + i;
+            adjacency_list.erase(pos_to_delete);
         }
         else {
-            auto elist = v->get_edge_list();
+            auto elist = adjacency_list.at(i).get_edge_list();
             for (auto e = elist.begin(); e != elist.end(); e++) {
                 auto edge = *e;
                 if(edge->get_endpoint() == label) {
-                    v->erase_edge(e);
+                    adjacency_list.at(i).erase_edge(e);
                 }
             }
         }
