@@ -167,6 +167,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     bool first_time = true;
     int n = 0;
     for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
+        // avoid iterators... find a way to get a iterator of a list when have the index
         std::cout << ++n << " time in the for loop" << std::endl;
         auto edge = *e;
         unsigned long temp_dist = distance + edge->get_weight();
