@@ -26,10 +26,10 @@ void Graph::removeVertex(std::string label) {
             auto elist = adjacency_list.at(i).get_edge_list();
             for (auto e = elist.begin(); e != elist.end(); e++) {
                 auto edge = *e;
-                std::cout << "edge endpoint = " << edge->get_endpoint() << std::endl;
+                std::cout << "\tedge endpoint = " << edge->get_endpoint() << std::endl;
                 if(edge->get_endpoint() == label) {
                     adjacency_list.at(i).remove_edge(edge);
-                    std::cout << "removed the edge";
+                    std::cout << "\tremoved the edge with that endpoint" << std::endl;
                 }
             }
         }
