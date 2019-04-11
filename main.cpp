@@ -38,16 +38,15 @@ int main() {
     for (const auto label : vertices1) g.addVertex(label);
     for (const auto &e : edges1) g.addEdge(e.a, e.b, e.w);
 
-    std::cout << "called all addVertex and addEdge" << std::endl;
-
     auto adjl = g.get_adjacency_list();
     printGraph(adjl);
+    std::cout << std::endl;
 
-    // std::cout << "about to remove a vertex" << std::endl;
-    // g.removeVertex("1");
-    // std::cout << "removed a vertex" << std::endl;
-    // adjl = g.get_adjacency_list();
-    // printGraph(adjl);
+    std::cout << "about to remove a vertex" << std::endl;
+    g.removeVertex("1");
+    std::cout << "removed a vertex" << std::endl;
+    adjl = g.get_adjacency_list();
+    printGraph(adjl);
     std::cout << std::endl;
     g.removeEdge("1", "2");
     g.removeEdge("6", "1");
