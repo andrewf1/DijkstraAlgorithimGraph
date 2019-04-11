@@ -234,4 +234,5 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
 
     Dijkstra algo(adjacency_list);
     algo.createTable();
+    return 0;
 }
