@@ -149,6 +149,7 @@ unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned lo
 
 //Dijkstra's Algorithm
 unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path) {
+    std::cout << "start vertex = " << startLabel << " and end vertex = " << endLabel << std::endl;
     //use recursion
     // auto unvisited = adjacency_list;
     // int distance = 0;
