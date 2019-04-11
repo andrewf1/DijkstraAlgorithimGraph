@@ -108,7 +108,7 @@ unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned lo
         std::cout << "\tin the else of calculate weight" << std::endl;
         int n = 0;
         for (unsigned int i = 0; i < path.size(); i++) {
-            std::cout << "\t" << n << " time in the for loop" << std::endl;
+            std::cout << "\t" << ++n << " time in the for loop" << std::endl;
             auto v = at(path.at(i));
             for(auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
                 std::cout << "\t\tinside inner most loop" << std::endl;
@@ -167,7 +167,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     bool first_time = true;
     int n = 0;
     for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
-        std::cout << n << " time in the for loop" << std::endl;
+        std::cout << ++n << " time in the for loop" << std::endl;
         auto edge = *e;
         unsigned long temp_dist = distance + edge->get_weight();
         // if (checkPath(*curr_vertex, endLabel)) {
