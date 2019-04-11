@@ -1,3 +1,6 @@
+#ifndef GRAPH_HPP
+#define GRAPH_HPP
+
 #include "GraphBase.hpp"
 #include <list>
 #include <iostream>
@@ -49,3 +52,5 @@ private:
     // std::vector<std::pair<Vertex, std::list<Edge>>> adjacency_list;
     std::vector<Vertex> adjacency_list;
 };
+
+#endif

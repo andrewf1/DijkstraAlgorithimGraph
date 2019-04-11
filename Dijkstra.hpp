@@ -1,3 +1,6 @@
+#ifndef DIJKSTRA_HPP
+#define DIJKSTRA_HPP
+
 #include "Graph.hpp"
 
 struct dRow {
@@ -19,3 +22,5 @@ private:
     std::vector<Vertex> vistied;
     std::vector<dRow> table;
 };
+
+#endif
