@@ -50,9 +50,11 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
     Edge* endpoint_edge = new Edge(label1, weight);
     for (auto v : adjacency_list) {
         if (*v == label1) {
-           v.push_back_edge(vertex_edge); 
+            std::cout << "v = " << *v << ", ep = " << vertex_edge->get_endpoint() << ", w = " << vertex_edge->get_weight() << std::endl;    
+            v.push_back_edge(vertex_edge); 
         }
         else if (*v == label2) {
+            std::cout << "v = " << *v << ", ep = " << vertex_edge->get_endpoint() << ", w = " << vertex_edge->get_weight() << std::endl;    
             v.push_back_edge(endpoint_edge);
         }
     }
