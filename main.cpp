@@ -10,7 +10,7 @@ void printEdges(std::list<Edge*> el) {
 
 void printGraph(std::vector<Vertex> adjl) {
     for (auto v :adjl) {
-        std::cout << "Vertex " << ": ";
+        std::cout << "Vertex " << *v << ": ";
         auto elist = v.get_edge_list();
         printEdges(elist);
     }
