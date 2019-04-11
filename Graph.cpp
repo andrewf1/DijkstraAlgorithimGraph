@@ -81,7 +81,7 @@ bool Graph::checkPath(std::string curr_vertex, std::string destination) {
         auto v = at(curr_vertex);
         for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
             std::cout << "\tinside the for loop of checkPath, new endpoint = " << (*e)->get_endpoint() << std::endl;
-            checkPath((*e)->get_endpoint(), destination);
+            return checkPath((*e)->get_endpoint(), destination);
         }
         std::cout << "\tcheckPath is about to return false" << std::endl;
         return false;
@@ -171,8 +171,8 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
         std::cout << ++n << " time in the for loop" << std::endl;
         auto edge = *e;
         unsigned long temp_dist = distance + edge->get_weight();
-        // if (checkPath(*curr_vertex, endLabel)) {
-        //     std::cout << "checkPath returned true" << std::endl;
+        if (checkPath(*curr_vertex, endLabel)) {
+            std::cout << "checkPath returned true" << std::endl;
             if (temp_dist < distance || first_time) {
                 std::cout << "it is the first time running or temp_dist < distance" << std::endl;
                 first_time = false;
@@ -183,7 +183,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                     return distance;
                 }
             }
-        // }
+        }
     }
     if(!next_vertex.empty()) {
         std::cout << "pushing [" << next_vertex << "] into the path" << std::endl;
