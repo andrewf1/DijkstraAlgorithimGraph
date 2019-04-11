@@ -1,4 +1,5 @@
 #include "Graph.hpp"
+#include "Dijkstra.hpp"
 
 void Graph::addVertex(std::string label) {
     Vertex v{label};
@@ -152,7 +153,7 @@ unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned lo
 // man scratch this and start over, it is not working, we are getting the smallest weighted edge, not necessarily
 //the one that is going to reach the path with least weight eventually (check 1 -> 6)
 unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path) {
-    std::cout << "start vertex = " << startLabel << " and end vertex = " << endLabel << std::endl;
+    // std::cout << "start vertex = " << startLabel << " and end vertex = " << endLabel << std::endl;
     //use recursion
     // auto unvisited = adjacency_list;
     // int distance = 0;
@@ -165,10 +166,11 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     //     }
     // }
 
-    auto curr_vertex = at(startLabel);
-    std::string next_vertex;
-    unsigned long distance = 0;
-    bool first_time = true;
+    // auto curr_vertex = at(startLabel);
+    // std::string next_vertex;
+    // unsigned long distance = 0;
+    // bool first_time = true;
+    //--------------------------------------------------------------------------------------------------
     // int n = 0;
     // for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
     //     // avoid iterators... find a way to get a iterator of a list when have the index
@@ -191,37 +193,45 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     //         }
     //     }
     // }
-    auto edge = curr_vertex.get_edge_list().begin();
-    int n = 0;
-    for (unsigned int i = 0; i < curr_vertex.get_edge_list().size(); i++) {
-        std::cout << "edge->get_weight() = " << (*edge)->get_weight() << std::endl;
-        std::cout << ++n << " time in the for loop" << std::endl;
-        if(edge != curr_vertex.get_edge_list().begin() && edge != curr_vertex.get_edge_list().end()) {
-            edge++;
-        }
-        unsigned long temp_dist = distance + (*edge)->get_weight();
-        std::cout << "distance = " << distance << " and edge->get_weight() = " << (*edge)->get_weight() << std::endl;
-        std::cout << "curr_vertex = " << *curr_vertex << " and endLabel = " << endLabel << std::endl;
-        if (checkPath(*curr_vertex, endLabel)) {
-            std::cout << "checkPath returned true" << std::endl;
-            std::cout << "temp_dist = " << temp_dist << ", distance = " << distance << std::endl;
-            if (temp_dist < distance || first_time) {
-                std::cout << "it is the first time running or temp_dist < distance" << std::endl;
-                first_time = false;
-                distance = temp_dist;
-                next_vertex = (*edge)->get_endpoint();
-                std::cout << "next_vertex is now set to: " << (*edge)->get_endpoint() << std::endl;
-            }
-        }
-    }
-    if(!next_vertex.empty()) {
-        std::cout << "pushing [" << next_vertex << "] into the path" << std::endl;
-        path.push_back(next_vertex);
-        return distance + shortestPath(next_vertex, endLabel, path);
-    }
-    else {
-        //cal a function that calculates the weight given the path 
-        std::cout << "about to call calculate weight" << std::endl;
-        return calculate_weight(path, distance);
-    }
+    //------------------------------------------------------------------------------------------------
+
+
+
+
+    // auto edge = curr_vertex.get_edge_list().begin();
+    // int n = 0;
+    // for (unsigned int i = 0; i < curr_vertex.get_edge_list().size(); i++) {
+    //     std::cout << "edge->get_weight() = " << (*edge)->get_weight() << std::endl;
+    //     std::cout << ++n << " time in the for loop" << std::endl;
+    //     if(edge != curr_vertex.get_edge_list().begin() && edge != curr_vertex.get_edge_list().end()) {
+    //         edge++;
+    //     }
+    //     unsigned long temp_dist = distance + (*edge)->get_weight();
+    //     std::cout << "distance = " << distance << " and edge->get_weight() = " << (*edge)->get_weight() << std::endl;
+    //     std::cout << "curr_vertex = " << *curr_vertex << " and endLabel = " << endLabel << std::endl;
+    //     if (checkPath(*curr_vertex, endLabel)) {
+    //         std::cout << "checkPath returned true" << std::endl;
+    //         std::cout << "temp_dist = " << temp_dist << ", distance = " << distance << std::endl;
+    //         if (temp_dist < distance || first_time) {
+    //             std::cout << "it is the first time running or temp_dist < distance" << std::endl;
+    //             first_time = false;
+    //             distance = temp_dist;
+    //             next_vertex = (*edge)->get_endpoint();
+    //             std::cout << "next_vertex is now set to: " << (*edge)->get_endpoint() << std::endl;
+    //         }
+    //     }
+    // }
+    // if(!next_vertex.empty()) {
+    //     std::cout << "pushing [" << next_vertex << "] into the path" << std::endl;
+    //     path.push_back(next_vertex);
+    //     return distance + shortestPath(next_vertex, endLabel, path);
+    // }
+    // else {
+    //     //cal a function that calculates the weight given the path 
+    //     std::cout << "about to call calculate weight" << std::endl;
+    //     return calculate_weight(path, distance);
+    // }
+
+    Dijkstra algo(adjacency_list);
+    algo.createTable();
 }
