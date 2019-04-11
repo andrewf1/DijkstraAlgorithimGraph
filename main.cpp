@@ -49,7 +49,7 @@ int main() {
     adjl = g.get_adjacency_list();
     printGraph(adjl);
 
-    g.removeEdge("4", "5");
+    g.removeEdge("4", "2");
     g.removeEdge("3", "6");
     adjl = g.get_adjacency_list();
     printGraph(adjl);
