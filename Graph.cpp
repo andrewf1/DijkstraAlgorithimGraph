@@ -16,16 +16,20 @@ void Graph::addVertex(std::string label) {
 
 void Graph::removeVertex(std::string label) {
     for (unsigned int i = 0; i < adjacency_list.size(); i++) {
+        std::cout << "in for loop, vertex = " << *adjacency_list.at(i) << std::endl;
         if (*adjacency_list.at(i) == label) {
             auto pos_to_delete = adjacency_list.begin() + i;
             adjacency_list.erase(pos_to_delete);
+            std::cout << "just deleted that vertex from alist" << std::endl;
         }
         else {
             auto elist = adjacency_list.at(i).get_edge_list();
             for (auto e = elist.begin(); e != elist.end(); e++) {
                 auto edge = *e;
+                std::cout << "edge endpoint = " << edge->get_endpoint() << std::endl;
                 if(edge->get_endpoint() == label) {
-                    adjacency_list.at(i).erase_edge(e);
+                    adjacency_list.at(i).remove_edge(edge);
+                    std::cout << "removed the edge";
                 }
             }
         }
