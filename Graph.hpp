@@ -33,6 +33,9 @@ public:
     ~Graph() = default; //especially this one
 
     int size() { return adjacency_list.size(); } // number of verticies in graph
+    Vertex at(std::string label);
+    bool checkPath(std::string curr_vertex, std::string destination);
+    unsigned long calculate_weight(std::vector<std::string> path, unsigned long curr_weight);
 
     virtual void addVertex(std::string label); //inserts a new vertex storing the element
     virtual void removeVertex(std::string label);  // remove vertex containing the element and all its incident edges

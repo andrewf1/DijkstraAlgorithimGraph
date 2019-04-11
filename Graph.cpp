@@ -60,8 +60,111 @@ void Graph::removeEdge(std::string label1, std::string label2) {
         }
     }
 }
+
+Vertex Graph::at(std::string label)  {
+    for (unsigned int i = 0; i < adjacency_list.size(); i++) {
+        if (*adjacency_list.at(i) == label) {
+            return adjacency_list.at(i);
+        }
+    }
+    Vertex v;
+    return v;
+}
+
+bool Graph::checkPath(std::string curr_vertex, std::string destination) {
+    if(curr_vertex == destination) {
+        return true;
+    }
+    else {
+        auto v = at(curr_vertex);
+        for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+            checkPath((*e)->get_endpoint(), destination);
+        }
+        return false;
+    }
+}
+
+unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned long curr_weight) {
+    unsigned long weight = 0;
+    std::vector<std::string> new_path;
+    if (path.size() == 2) {
+        auto v = at(path.at(0));
+        for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+            auto edge = *e;
+            if (edge->get_endpoint() == path.at(1)) {
+                return edge->get_weight() + curr_weight;
+            }
+        }
+    }
+    else {
+        for (unsigned int i = 0; i < path.size(); i++) {
+            auto v = at(path.at(i));
+            for(auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+                auto edge = *e;
+                if (edge->get_endpoint() == path.at(1)) {
+                    weight += edge->get_weight();
+                    break;
+                }
+            }
+            if ((i != 0) || (i != 1)) {
+                new_path.push_back(path.at(i));
+            }
+        }
+        calculate_weight(new_path, weight);
+    }        
+}
+
+//     for (unsigned int i = 0; i < path.size(); i++) {
+//         auto v = at(path.at(i));
+//         if (i != (path.size() - 1)) {
+//             for(auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+//                 auto edge = *e;
+//                 if (edge->get_endpoint() == path.at(i+1)) {
+//                     weight += edge->get_weight();
+//                 }
+//             }
+//         }
+//         else {
+            
+//         }
+//     }
+// }
+
 //Dijkstra's Algorithm
 unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path) {
     //use recursion
-    return 0;
+    // auto unvisited = adjacency_list;
+    // int distance = 0;
+    // while (!unvisited.empty()) {
+    //     auto curr_vertex = unvisited.at(0);
+    //     for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
+    //         auto edge = *e;
+    //         int new_dist_from_start = edge->get_weight() + 0;
+            
+    //     }
+    // }
+
+    auto curr_vertex = at(startLabel);
+    std::string next_vertex;
+    unsigned long distance = 0;
+    bool first_time = true;
+    for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
+        auto edge = *e;
+        int temp_dist = distance + edge->get_weight();
+        if (checkPath(*curr_vertex, endLabel)) {
+            if (temp_dist < distance || first_time) {
+                first_time = false;
+                distance = temp_dist;
+                next_vertex = edge->get_endpoint();
+            }
+        }
+    }
+    if(!next_vertex.empty()) {
+        path.push_back(next_vertex);
+        return distance + shortestPath(next_vertex, endLabel, path);
+    }
+    else {
+        //cal a function that calculates the weight given the path 
+        return calculate_weight(path, distance);
+    }
 }
