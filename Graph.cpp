@@ -95,6 +95,7 @@ unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned lo
                 return edge->get_weight() + curr_weight;
             }
         }
+        return weight;
     }
     else {
         for (unsigned int i = 0; i < path.size(); i++) {
@@ -150,7 +151,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     bool first_time = true;
     for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
         auto edge = *e;
-        int temp_dist = distance + edge->get_weight();
+        unsigned long temp_dist = distance + edge->get_weight();
         if (checkPath(*curr_vertex, endLabel)) {
             if (temp_dist < distance || first_time) {
                 first_time = false;
