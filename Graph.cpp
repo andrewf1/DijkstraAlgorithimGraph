@@ -171,6 +171,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
         std::cout << ++n << " time in the for loop" << std::endl;
         auto edge = *e;
         unsigned long temp_dist = distance + edge->get_weight();
+        std::cout << "distance = " << distance << " and edge->get_weight() = " << edge->get_weight() << std::endl;
         if (checkPath(*curr_vertex, endLabel)) {
             std::cout << "checkPath returned true" << std::endl;
             std::cout << "temp_dist = " << temp_dist << ", distance = " << distance << std::endl;
