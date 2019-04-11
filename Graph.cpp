@@ -72,14 +72,18 @@ Vertex Graph::at(std::string label)  {
 }
 
 bool Graph::checkPath(std::string curr_vertex, std::string destination) {
+    std::cout << "\tinside checkPath" << std::endl;
     if(curr_vertex == destination) {
+        std::cout << "\tCheckPath is about to return true" << std::endl;
         return true;
     }
     else {
         auto v = at(curr_vertex);
         for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+            std::cout << "\tinside the for loop of checkPath, new endpoint = " << (*e)->get_endpoint() << std::endl;
             checkPath((*e)->get_endpoint(), destination);
         }
+        std::cout << "\tcheckPath is about to return false" << std::endl;
         return false;
     }
 }
@@ -88,28 +92,40 @@ unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned lo
     unsigned long weight = 0;
     std::vector<std::string> new_path;
     if (path.size() == 2) {
+        std::cout << "\tthe path size is 2" << std::endl;
+        std::cout << "\tpath.at(0) = " << path.at(0) << std::endl;
         auto v = at(path.at(0));
         for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
             auto edge = *e;
+            std::cout << "\tpath.at(1) = " << path.at(1) << std::endl;
             if (edge->get_endpoint() == path.at(1)) {
+                std::cout << "\tinside the if and edge->get_endpoint(() = " << edge->get_endpoint() << std::endl;
                 return edge->get_weight() + curr_weight;
             }
         }
     }
     else {
+        std::cout << "\tin the else of calculate weight" << std::endl;
+        int n = 0;
         for (unsigned int i = 0; i < path.size(); i++) {
+            std::cout << "\t" << n << " time in the for loop" << std::endl;
             auto v = at(path.at(i));
             for(auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+                std::cout << "\t\tinside inner most loop" << std::endl;
                 auto edge = *e;
-                if (edge->get_endpoint() == path.at(1)) {
+                std::cout << "\t\tendpoint = " << edge->get_endpoint() << " and path.at(i+1) + " << path.at(i+1) << std::endl;
+                if (edge->get_endpoint() == path.at(i + 1)) {
                     weight += edge->get_weight();
+                    std::cout << "\t\tnew weight = " << weight << std::endl;
                     break;
                 }
             }
             if ((i != 0) || (i != 1)) {
+                std::cout << "\tpushing back [" << path.at(i) << "]" << std::endl;
                 new_path.push_back(path.at(i));
             }
         }
+        std::cout << "\tabout to recursviely call calculate weight" << std::endl;
         calculate_weight(new_path, weight);
     }        
     return weight;
@@ -149,23 +165,30 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     std::string next_vertex;
     unsigned long distance = 0;
     bool first_time = true;
+    int n = 0;
     for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
+        std::cout << n << " time in the for loop" << std::endl;
         auto edge = *e;
         unsigned long temp_dist = distance + edge->get_weight();
         if (checkPath(*curr_vertex, endLabel)) {
+            std::cout << "checkPath returned true" << std::endl;
             if (temp_dist < distance || first_time) {
+                std::cout << "it is the first time running or temp_dist < distance" << std::endl;
                 first_time = false;
                 distance = temp_dist;
                 next_vertex = edge->get_endpoint();
+                std::cout << "next_vertex is now set to: " << edge->get_endpoint() << std::endl;
             }
         }
     }
     if(!next_vertex.empty()) {
+        std::cout << "pushing [" << next_vertex << "] into the path" << std::endl;
         path.push_back(next_vertex);
         return distance + shortestPath(next_vertex, endLabel, path);
     }
     else {
         //cal a function that calculates the weight given the path 
+        std::cout << "about to call calculate weight" << std::endl;
         return calculate_weight(path, distance);
     }
 }
