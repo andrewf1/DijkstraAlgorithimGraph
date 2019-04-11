@@ -166,12 +166,37 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     unsigned long distance = 0;
     bool first_time = true;
     int n = 0;
-    for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
-        // avoid iterators... find a way to get a iterator of a list when have the index
+    // for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
+    //     // avoid iterators... find a way to get a iterator of a list when have the index
+    //     std::cout << ++n << " time in the for loop" << std::endl;
+    //     auto edge = *e;
+    //     unsigned long temp_dist = distance + edge->get_weight();
+    //     std::cout << "distance = " << distance << " and edge->get_weight() = " << edge->get_weight() << std::endl;
+    //     if (checkPath(*curr_vertex, endLabel)) {
+    //         std::cout << "checkPath returned true" << std::endl;
+    //         std::cout << "temp_dist = " << temp_dist << ", distance = " << distance << std::endl;
+    //         if (temp_dist < distance || first_time) {
+    //             std::cout << "it is the first time running or temp_dist < distance" << std::endl;
+    //             first_time = false;
+    //             distance = temp_dist;
+    //             next_vertex = edge->get_endpoint();
+    //             std::cout << "next_vertex is now set to: " << edge->get_endpoint() << std::endl;
+    //             if(edge->get_endpoint() == endLabel) {
+    //                 return distance;
+    //             }
+    //         }
+    //     }
+    // }
+    auto edge = curr_vertex.get_edge_list().begin();
+    int n = 0;
+    for (unsigned int i = 0; i < curr_vertex.get_edge_list().size(); i++) {
+        std::cout << "edge->get_weight() = " << (*edge)->get_weight() << std::endl;
         std::cout << ++n << " time in the for loop" << std::endl;
-        auto edge = *e;
-        unsigned long temp_dist = distance + edge->get_weight();
-        std::cout << "distance = " << distance << " and edge->get_weight() = " << edge->get_weight() << std::endl;
+        if(edge != curr_vertex.get_edge_list().begin()) {
+            edge++;
+        }
+        unsigned long temp_dist = distance + (*edge)->get_weight();
+        std::cout << "distance = " << distance << " and edge->get_weight() = " << (*edge)->get_weight() << std::endl;
         if (checkPath(*curr_vertex, endLabel)) {
             std::cout << "checkPath returned true" << std::endl;
             std::cout << "temp_dist = " << temp_dist << ", distance = " << distance << std::endl;
@@ -179,11 +204,8 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                 std::cout << "it is the first time running or temp_dist < distance" << std::endl;
                 first_time = false;
                 distance = temp_dist;
-                next_vertex = edge->get_endpoint();
-                std::cout << "next_vertex is now set to: " << edge->get_endpoint() << std::endl;
-                if(edge->get_endpoint() == endLabel) {
-                    return distance;
-                }
+                next_vertex = (*edge)->get_endpoint();
+                std::cout << "next_vertex is now set to: " << (*edge)->get_endpoint() << std::endl;
             }
         }
     }
