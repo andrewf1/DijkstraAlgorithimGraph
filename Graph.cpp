@@ -192,7 +192,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     for (unsigned int i = 0; i < curr_vertex.get_edge_list().size(); i++) {
         std::cout << "edge->get_weight() = " << (*edge)->get_weight() << std::endl;
         std::cout << ++n << " time in the for loop" << std::endl;
-        if(edge != curr_vertex.get_edge_list().begin()) {
+        if(edge != curr_vertex.get_edge_list().begin() && edge != curr_vertex.get_edge_list().end()) {
             edge++;
         }
         unsigned long temp_dist = distance + (*edge)->get_weight();
