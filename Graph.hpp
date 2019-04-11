@@ -20,10 +20,12 @@ class Vertex {
 public:
     Vertex(std::string held = "") : data{held} {};
     std::string operator*() { return data; }; //return element at vertex
+    void push_back_edge(Edge* e) { edge_list.push_back(e); }
+    std::list<Edge*> get_edge_list() { return edge_list; }
     bool isAdjacentTo(Vertex v);
 private:
     std::string data;
-    std::vector<Edge*> edge_list;
+    std::list<Edge*> edge_list;
 };
 
 class Graph : public GraphBase {

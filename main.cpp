@@ -1,15 +1,27 @@
 #include "Graph.hpp"
 #include <iostream>
 
-void printGraph(std::vector<std::pair<Vertex, std::list<Edge>>> adjl) {
-    for (auto v : adjl) {
-        std::cout << "Vertex " << *(v.first) << ": ";
-        for (auto e : v.second) {
-            std::cout << '[' << e.get_endpoint1() << ", " << e.get_endpoint2() << " (" << e.get_weight() 
-            << ")]->";
-        }
-        std::cout << "[/]" << std::endl;
+void printEdges(std::list<Edge*> el) {
+    for (auto e : el) {
+        std::cout << '[' << e->get_endpoint() << ", " << "(" << e->get_weight() << ")]->";
     }
+    std::cout << "[/]" << std::endl;
+}
+
+void printGraph(std::vector<Vertex> adjl) {
+    for (auto v :adjl) {
+        std::cout << "Vertex " << ": ";
+        auto elist = v.get_edge_list();
+        printEdges(elist);
+    }
+    // for (auto v : adjl) {
+    //     std::cout << "Vertex " << *(v.first) << ": ";
+    //     for (auto e : v.second) {
+    //         std::cout << '[' << e.get_endpoint1() << ", " << e.get_endpoint2() << " (" << e.get_weight() 
+    //         << ")]->";
+    //     }
+    //     std::cout << "[/]" << std::endl;
+    // }
 }
 
 int main() {
@@ -31,11 +43,11 @@ int main() {
     auto adjl = g.get_adjacency_list();
     printGraph(adjl);
 
-    std::cout << "about to remove a vertex" << std::endl;
-    g.removeVertex("1");
-    std::cout << "removed a vertex" << std::endl;
-    adjl = g.get_adjacency_list();
-    printGraph(adjl);
+    // std::cout << "about to remove a vertex" << std::endl;
+    // g.removeVertex("1");
+    // std::cout << "removed a vertex" << std::endl;
+    // adjl = g.get_adjacency_list();
+    // printGraph(adjl);
 
     return 0;
 }

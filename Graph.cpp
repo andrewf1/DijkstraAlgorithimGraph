@@ -46,11 +46,14 @@ void Graph::removeVertex(std::string label) {
 }
 
 void Graph::addEdge(std::string label1, std::string label2, unsigned long weight) {
-    Edge vertex_edge {label2, weight};
-    Edge endpoint_edge {label1, weight};
+    Edge* vertex_edge = new Edge(label2, weight);
+    Edge* endpoint_edge = new Edge(label1, weight);
     for (auto v : adjacency_list) {
-        if((*v == label1) || (*v == label2)) {
-            
+        if (*v == label1) {
+           v.push_back_edge(vertex_edge); 
+        }
+        else if (*v == label2) {
+            v.push_back_edge(endpoint_edge);
         }
     }
     /*Edge e{label1, label2, weight};
