@@ -91,6 +91,24 @@ void Graph::addEdge(std::string label1, std::string label2, unsigned long weight
 }
 
 void Graph::removeEdge(std::string label1, std::string label2) {
+    for (unsigned int i = 0; i < adjacency_list.size(); i++) {
+        auto elist = adjacency_list.at(i).get_edge_list();
+        for (auto e = elist.begin(); e != elist.end(); e++) {
+            auto edge = *e;
+            if(*adjacency_list.at(i) == label1) {
+                if (edge->get_endpoint() == label2) {
+                    adjacency_list.at(i).remove_edge(edge);
+                    break;
+                }
+            }
+            else if (*adjacency_list.at(i) == label2) {
+                if (edge->get_endpoint() == label1) {
+                    adjacency_list.at(i).remove_edge(edge);\
+                    break;
+                }
+            }     
+        }
+    }
     /*std::cout << "inside remove edge" << std::endl;
     for (auto v = adjacency_list.begin(); v != adjacency_list.end(); v++) {
         if ((*(v->first) == label1) || (*(v->first) == label2)) {
