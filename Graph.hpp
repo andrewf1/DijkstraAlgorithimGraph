@@ -4,6 +4,10 @@
 #include "GraphBase.hpp"
 #include <list>
 #include <iostream>
+#include <tuple>
+#include <queue>
+#include <limits.h>
+#include <map>
 
 class Edge { 
 public:
