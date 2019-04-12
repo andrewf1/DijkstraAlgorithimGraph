@@ -165,7 +165,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     // std::cout << "start vertex = " << startLabel << " and end vertex = " << endLabel << std::endl;
     //use recursion
     // auto unvisited = adjacency_list;
-    // int distance = 0;
+    // int distance_from_start = 0;
     // while (!unvisited.empty()) {
     //     auto curr_vertex = unvisited.at(0);
     //     for (auto e = curr_vertex.get_edge_list().begin(); e != curr_vertex.get_edge_list().end(); e++) {
@@ -244,20 +244,20 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     // Dijkstra algo(adjacency_list);
     // algo.createTable();
     // return 0;
-    std::priority_queue<std::pair<int, std::string>, std::vector<std::pair<int, std::string>>, std::greater<std::pair<int, std::string>>> spqueue;
-    std::map<std::string, int> distance;
-    std::map<std::string, std::string> parent;
+    std::priority_queue<std::pair<int, std::string>, std::vector<std::pair<int, std::string>>, std::greater<std::pair<int, std::string>>> pq;
+    std::map<std::string, int> distance_from_start;
+    std::map<std::string, std::string> previous;
 
     for (unsigned int i = 0; i < adjacency_list.size(); i++) {
-        distance[*adjacency_list.at(i)] = INT_MAX;
-        parent[*adjacency_list.at(i)] = "flag";
+        distance_from_start[*adjacency_list.at(i)] = INT_MAX;
+        previous[*adjacency_list.at(i)] = "flag";
     }
 
-    spqueue.push(std::make_pair(0, startLabel));
-    distance[startLabel] = 0;
+    pq.push(std::make_pair(0, startLabel));
+    distance_from_start[startLabel] = 0;
     do {
-        std::string str1 = spqueue.top().second;
-        spqueue.pop();
+        std::string str1 = pq.top().second;
+        pq.pop();
         std::string B;
 
         for (unsigned int i = 0; i < adjacency_list.size(); i++) {
@@ -274,25 +274,25 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                     B = x->get_endpoint();
                 }
                 auto weight = x->get_weight();
-                if(!(distance[B] > distance[str1] + weight)) {
+                if(!(distance_from_start[B] > distance_from_start[str1] + weight)) {
                     continue;
                 }
-                parent[B] = str1;
-                distance[B] = distance[str1] + weight;
-                spqueue.push(std::make_pair(distance[B], B));
+                previous[B] = str1;
+                distance_from_start[B] = distance_from_start[str1] + weight;
+                pq.push(std::make_pair(distance_from_start[B], B));
             }
         }
-    } while (!spqueue.empty());
+    } while (!pq.empty());
 
     path.push_back(startLabel);
-    print(parent, endLabel, path);
-    return distance[endLabel];
+    createPath(previous, endLabel, path);
+    return distance_from_start[endLabel];
 
 }
 
-void Graph::print(std::map<std::string, std::string> parent, std::string endLabel , std::vector<std::string> &path) {
-    if (parent[endLabel] != "flag"){
-        print(parent, parent[endLabel],path);
+void Graph::createPath(std::map<std::string, std::string> previous, std::string endLabel , std::vector<std::string> &path) {
+    if (previous[endLabel] != "flag"){
+        createPath(previous, previous[endLabel],path);
         path.push_back(endLabel);
     }
     else
