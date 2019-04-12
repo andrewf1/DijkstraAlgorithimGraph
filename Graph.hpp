@@ -39,7 +39,7 @@ public:
     ~Graph(); 
 
     Vertex at(std::string label);
-    void createPath(std::map<std::string, std::string> parent, std::string endLabel , std::vector<std::string> &path);
+    void createPath( std::vector<std::string>& path, std::map<std::string, std::string> parent, std::string endLabel);
     std::vector<Vertex> get_adjacency_list() const { return adjacency_list; } 
 
     virtual void addVertex(std::string label); //inserts a new vertex storing the element
