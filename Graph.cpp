@@ -72,65 +72,65 @@ Vertex Graph::at(std::string label)  {
     return v;
 }
 
-bool Graph::checkPath(std::string curr_vertex, std::string destination) {
-    std::cout << "\tinside checkPath" << std::endl;
-    if(curr_vertex == destination) {
-        std::cout << "\tCheckPath is about to return true" << std::endl;
-        return true;
-    }
-    else {
-        auto v = at(curr_vertex);
-        for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
-            std::cout << "\tinside the for loop of checkPath, new endpoint = " << (*e)->get_endpoint() << std::endl;
-            return checkPath((*e)->get_endpoint(), destination);
-        }
-        std::cout << "\tcheckPath is about to return false" << std::endl;
-        return false;
-    }
-}
+// bool Graph::checkPath(std::string curr_vertex, std::string destination) {
+//     std::cout << "\tinside checkPath" << std::endl;
+//     if(curr_vertex == destination) {
+//         std::cout << "\tCheckPath is about to return true" << std::endl;
+//         return true;
+//     }
+//     else {
+//         auto v = at(curr_vertex);
+//         for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+//             std::cout << "\tinside the for loop of checkPath, new endpoint = " << (*e)->get_endpoint() << std::endl;
+//             return checkPath((*e)->get_endpoint(), destination);
+//         }
+//         std::cout << "\tcheckPath is about to return false" << std::endl;
+//         return false;
+//     }
+// }
 
-unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned long curr_weight) {
-    unsigned long weight = 0;
-    std::vector<std::string> new_path;
-    if (path.size() == 2) {
-        std::cout << "\tthe path size is 2" << std::endl;
-        std::cout << "\tpath.at(0) = " << path.at(0) << std::endl;
-        auto v = at(path.at(0));
-        for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
-            auto edge = *e;
-            std::cout << "\tpath.at(1) = " << path.at(1) << std::endl;
-            if (edge->get_endpoint() == path.at(1)) {
-                std::cout << "\tinside the if and edge->get_endpoint(() = " << edge->get_endpoint() << std::endl;
-                return edge->get_weight() + curr_weight;
-            }
-        }
-    }
-    else {
-        std::cout << "\tin the else of calculate weight" << std::endl;
-        int n = 0;
-        for (unsigned int i = 0; i < path.size(); i++) {
-            std::cout << "\t" << ++n << " time in the for loop" << std::endl;
-            auto v = at(path.at(i));
-            for(auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
-                std::cout << "\t\tinside inner most loop" << std::endl;
-                auto edge = *e;
-                std::cout << "\t\tendpoint = " << edge->get_endpoint() << " and path.at(i+1) + " << path.at(i+1) << std::endl;
-                if (edge->get_endpoint() == path.at(i + 1)) {
-                    weight += edge->get_weight();
-                    std::cout << "\t\tnew weight = " << weight << std::endl;
-                    break;
-                }
-            }
-            if ((i != 0) || (i != 1)) {
-                std::cout << "\tpushing back [" << path.at(i) << "]" << std::endl;
-                new_path.push_back(path.at(i));
-            }
-        }
-        std::cout << "\tabout to recursviely call calculate weight" << std::endl;
-        calculate_weight(new_path, weight);
-    }        
-    return weight;
-}
+// unsigned long Graph::calculate_weight(std::vector<std::string> path, unsigned long curr_weight) {
+//     unsigned long weight = 0;
+//     std::vector<std::string> new_path;
+//     if (path.size() == 2) {
+//         std::cout << "\tthe path size is 2" << std::endl;
+//         std::cout << "\tpath.at(0) = " << path.at(0) << std::endl;
+//         auto v = at(path.at(0));
+//         for (auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+//             auto edge = *e;
+//             std::cout << "\tpath.at(1) = " << path.at(1) << std::endl;
+//             if (edge->get_endpoint() == path.at(1)) {
+//                 std::cout << "\tinside the if and edge->get_endpoint(() = " << edge->get_endpoint() << std::endl;
+//                 return edge->get_weight() + curr_weight;
+//             }
+//         }
+//     }
+//     else {
+//         std::cout << "\tin the else of calculate weight" << std::endl;
+//         int n = 0;
+//         for (unsigned int i = 0; i < path.size(); i++) {
+//             std::cout << "\t" << ++n << " time in the for loop" << std::endl;
+//             auto v = at(path.at(i));
+//             for(auto e = v.get_edge_list().begin(); e != v.get_edge_list().end(); e++) {
+//                 std::cout << "\t\tinside inner most loop" << std::endl;
+//                 auto edge = *e;
+//                 std::cout << "\t\tendpoint = " << edge->get_endpoint() << " and path.at(i+1) + " << path.at(i+1) << std::endl;
+//                 if (edge->get_endpoint() == path.at(i + 1)) {
+//                     weight += edge->get_weight();
+//                     std::cout << "\t\tnew weight = " << weight << std::endl;
+//                     break;
+//                 }
+//             }
+//             if ((i != 0) || (i != 1)) {
+//                 std::cout << "\tpushing back [" << path.at(i) << "]" << std::endl;
+//                 new_path.push_back(path.at(i));
+//             }
+//         }
+//         std::cout << "\tabout to recursviely call calculate weight" << std::endl;
+//         calculate_weight(new_path, weight);
+//     }        
+//     return weight;
+// }
 
 //     for (unsigned int i = 0; i < path.size(); i++) {
 //         auto v = at(path.at(i));
@@ -281,7 +281,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
 
 }
 
-void print(std::map<std::string, std::string> parent, std::string endLabel , std::vector<std::string> &path) {
+void Graph::print(std::map<std::string, std::string> parent, std::string endLabel , std::vector<std::string> &path) {
     if (parent[endLabel] != "flag"){
         print(parent, parent[endLabel],path);
         path.push_back(endLabel);
