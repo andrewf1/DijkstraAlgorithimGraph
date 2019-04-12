@@ -275,8 +275,8 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
             }
         }
     } while (!spqueue.empty());
-    for (auto s : parent) {
-        path.push_back(s.second);
+    for (auto s : distance) {
+        path.push_back(s.first);
     }
     path.push_back(endLabel);
     return distance[endLabel];
