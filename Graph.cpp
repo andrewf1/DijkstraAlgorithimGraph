@@ -1,6 +1,15 @@
 #include "Graph.hpp"
 #include "Dijkstra.hpp"
 
+Graph::~Graph() {
+    for(unsigned int i = 0; i < adjacency_list.size(); i++) {
+        for (auto edge : adjacency_list.at(i).get_edge_list()){
+            delete edge;
+        }
+    }
+    adjacency_list.clear();
+}
+
 void Graph::addVertex(std::string label) {
     Vertex v{label};
     adjacency_list.push_back(v);

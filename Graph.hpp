@@ -35,24 +35,18 @@ private:
 
 class Graph : public GraphBase {
 public:
-    //change these later
     Graph() = default;
-    ~Graph() = default; //especially this one
+    ~Graph(); 
 
-    int size() { return adjacency_list.size(); } // number of verticies in graph
     Vertex at(std::string label);
-    // bool checkPath(std::string curr_vertex, std::string destination);
-    // unsigned long calculate_weight(std::vector<std::string> path, unsigned long curr_weight);
     void print(std::map<std::string, std::string> parent, std::string endLabel , std::vector<std::string> &path);
+    std::vector<Vertex> get_adjacency_list() const { return adjacency_list; } 
 
     virtual void addVertex(std::string label); //inserts a new vertex storing the element
     virtual void removeVertex(std::string label);  // remove vertex containing the element and all its incident edges
     virtual void addEdge(std::string label1, std::string label2, unsigned long weight); //insert a new undirected edge with end vertices
     virtual void removeEdge(std::string label1, std::string label2); // remove the edge between the two vertices given
-    virtual unsigned long shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path);
-
-    std::vector<Vertex> get_adjacency_list() const { return adjacency_list; } 
-    
+    virtual unsigned long shortestPath(std::string startLabel, std::string endLabel, std::vector<std::string> &path);    
 private:
     // std::vector<std::pair<Vertex, std::list<Edge>>> adjacency_list;
     std::vector<Vertex> adjacency_list;
