@@ -246,7 +246,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
 
     spqueue.push(std::make_pair(0, startLabel));
     distance[startLabel] = 0;
-
+    path.push_back(startLabel);
     do {
         std::string str1 = spqueue.top().second;
         spqueue.pop();
@@ -263,6 +263,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                     }
                 }
                 else {
+                    path.push_back(str1);
                     B = x->get_endpoint();
                 }
                 auto weight = x->get_weight();
@@ -272,12 +273,12 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                 parent[B] = str1;
                 distance[B] = distance[str1] + weight;
                 spqueue.push(std::make_pair(distance[B], B));
-                path.push_back(B);
             }
         }
 
     } while (!spqueue.empty());
 
+    path.push_back(endLabel);
     return distance[endLabel];
 
 }
