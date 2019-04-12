@@ -246,7 +246,6 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
 
     spqueue.push(std::make_pair(0, startLabel));
     distance[startLabel] = 0;
-    path.push_back(startLabel);
     do {
         std::string str1 = spqueue.top().second;
         spqueue.pop();
@@ -275,10 +274,19 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
             }
         }
     } while (!spqueue.empty());
-    for (auto s : distance) {
-        path.push_back(s.first);
-    }
-    path.push_back(endLabel);
+
+    path.push_back(startLabel);
+
     return distance[endLabel];
 
 }
+
+void print(std::map<std::string, std::string> parent, std::string endLabel , std::vector<std::string> &path) {
+    if (parent[endLabel] != "flag"){
+        print(parent, parent[endLabel],path);
+        path.push_back(endLabel);
+    }
+    else
+        return;
+}
+
