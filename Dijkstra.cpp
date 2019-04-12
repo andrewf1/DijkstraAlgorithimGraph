@@ -39,12 +39,12 @@ void Dijkstra::createTable() {
                 if (current_vertex->visited == true) {
                     std::cout << "the currentVertex was visited" << std::endl;
                     current_vertex = tempVertex;
-                    std::cout << "currentVertex now = " << *(current_vertex->v);
+                    std::cout << "currentVertex now = " << *(current_vertex->v) << std::endl;
                 }
                 else if (tempVertex->distance_from_start < current_vertex->distance_from_start) {
                     std::cout << tempVertex->distance_from_start << " < " << current_vertex->distance_from_start << std::endl;
                     current_vertex = tempVertex;
-                    std::cout << "currentVertex now = " << *(current_vertex->v);
+                    std::cout << "currentVertex now = " << *(current_vertex->v) << std::endl;
                 }
                 delete tempVertex;
             }
