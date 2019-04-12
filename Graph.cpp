@@ -88,12 +88,12 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
     std::map<std::string, std::string> previous;
 
     for (unsigned int i = 0; i < adjacency_list.size(); i++) {
-        distance_from_start.at(*adjacency_list.at(i)) = INT_MAX;
-        previous.at(*adjacency_list.at(i)) = "";
+        distance_from_start[*adjacency_list.at(i)] = INT_MAX;
+        previous[*adjacency_list.at(i)] = "";
     }
 
     pq.push(std::make_pair(0, startLabel));
-    distance_from_start.at(startLabel) = 0;
+    distance_from_start[startLabel] = 0;
     do {
         std::string curr_vertex = pq.top().second;
         pq.pop();
@@ -113,25 +113,25 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                     neighbor = edge->get_endpoint();
                 }
                 auto weight = edge->get_weight();
-                if(!(distance_from_start.at(neighbor) > distance_from_start.at(curr_vertex) + weight)) {
+                if(!(distance_from_start[neighbor] > distance_from_start[curr_vertex] + weight)) {
                     continue;
                 }
-                previous.at(neighbor) = curr_vertex;
-                distance_from_start.at(neighbor) = distance_from_start.at(curr_vertex) + weight;
-                pq.push(std::make_pair(distance_from_start.at(neighbor), neighbor));
+                previous[neighbor] = curr_vertex;
+                distance_from_start[neighbor] = distance_from_start[curr_vertex] + weight;
+                pq.push(std::make_pair(distance_from_start[neighbor], neighbor));
             }
         }
     } while (!pq.empty());
 
     path.push_back(startLabel);
     createPath(path, previous, endLabel);
-    return distance_from_start.at(endLabel);
+    return distance_from_start[endLabel];
 
 }
 
 void Graph::createPath(std::vector<std::string>& path, std::map<std::string, std::string> previous, std::string endLabel) {
-    if (previous.at(endLabel) != "") { //if it is not the empty string
-        createPath(path, previous, previous.at(endLabel));
+    if (previous[endLabel] != "") { //if it is not the empty string
+        createPath(path, previous, previous[endLabel]);
         path.push_back(endLabel);
     }
     else { //return void when the endLabel = ""
