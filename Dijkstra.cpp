@@ -52,31 +52,51 @@ void Dijkstra::createTable() {
         std::cout << "-------------------------------------------------" << std::endl;
         // checking all the currentVertex's neighbors to properly updated the shortest distance if applicable
         auto edge_list = current_vertex->v.get_edge_list();
+        std::cout << "about to check all the neighbors of the current_vertex" << std::endl;
+        int n =0;
         for (auto edge : edge_list) {
+            std:: cout << n++ << " time in outter edge_list for loop" << std::endl;
             for (unsigned int i = 0; i < table.size(); i++) {
+                std::cout << i << " time in inner table loop" << std::endl;
+                std::cout << "edge endpoint = " << (*edge).get_endpoint() << " and table label = " << *table.at(i).v << std::endl;
                 if ((*edge).get_endpoint() == *table.at(i).v) {
+                    std::cout  << "\tThey were equal" << std::endl;
+                    std::cout << "is the neighbor visited? " << table.at(i).visited << std::endl;
                     if (table.at(i).visited == false) {
+                        std::cout << "\tit was not visited" << std::endl;
+                        std::cout << "new_dist = " << current_vertex->distance_from_start << " + " << (*edge).get_weight() << std::endl;
                         unsigned long new_distance = current_vertex->distance_from_start + (*edge).get_weight();
+                        std::cout << "new_distance = " << new_distance << std::endl;
+                        std::cout << "current neighbor's distance = " << table.at(i).distance_from_start << std::endl;
                         if (new_distance < table.at(i).distance_from_start) {
                             table.at(i).distance_from_start = new_distance;
                             table.at(i).prev = current_vertex->v;
+                            std::cout << "set the current neighbor's distance from start to the new distance and set its prev vertex to the current vertex" << std::endl;
                         }
                     }
                 }
             }
         }
-        
+        std::cout << "--------------------------------------------------------------------" << std::endl;
         //adding the current_vertex to the list of visited verticies
+        std::cout << "pushing " << *current_vertex->v << " back to visited" << std::endl; 
         vistied.push_back(current_vertex->v);
         current_vertex->visited = true;
+        std::cout << "set the current_vertex = true" << std::endl;
+
+        // chekcing which vertex to erase from unvisited
         for (unsigned int i = 0; i < unvisited.size(); i++) {
+            std::cout << i << " time in deletion for loop" << std::endl;
+            std::cout << "unvisited.at(i) = " << *unvisited.at(i) << " and current_vertex = " << *(current_vertex->v) << std::endl;
             if (*unvisited.at(i) == *(current_vertex->v)) {
                 auto iter_to_erase = unvisited.begin() + i;
+                std::cout << "about to erase: " << *(*iter_to_erase) << std::endl;
                 unvisited.erase(iter_to_erase);
                 break;
             }
         }
         delete current_vertex;
+        std::cout << "just deleted current_vertex" << std::endl;
     }
 }
 
