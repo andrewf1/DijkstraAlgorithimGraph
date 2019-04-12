@@ -52,19 +52,20 @@ void Dijkstra::createTable() {
         std::cout << "-------------------------------------------------" << std::endl;
         // checking all the currentVertex's neighbors to properly updated the shortest distance if applicable
         std::cout << "about to check all the neighbors of the current_vertex" << std::endl;
+        auto edge_list = current_vertex->v.get_edge_list();
         int n =0;
-        for (auto edge = current_vertex->v.get_edge_list().begin(); edge != current_vertex->v.get_edge_list().end(); edge++) {
+        while (!edge_list.empty()) {
             std:: cout << n++ << " time in outter edge_list for loop" << std::endl;
             for (unsigned int i = 0; i < table.size(); i++) {
                 std::cout << i << " time in inner table loop" << std::endl;
-                std::cout << "edge endpoint = " << (*edge)->get_endpoint() << " and table label = " << *table.at(i).v << std::endl;
-                if ((*edge)->get_endpoint() == *table.at(i).v) {
+                std::cout << "edge endpoint = " << edge_list.front()->get_weight() << " and table label = " << *table.at(i).v << std::endl;
+                if (edge_list.front()->get_endpoint() == *table.at(i).v) {
                     std::cout  << "\tThey were equal" << std::endl;
                     std::cout << "is the neighbor visited? " << table.at(i).visited << std::endl;
                     if (table.at(i).visited == false) {
                         std::cout << "\tit was not visited" << std::endl;
-                        std::cout << "new_dist = " << current_vertex->distance_from_start << " + " << (*edge)->get_weight() << std::endl;
-                        unsigned long new_distance = current_vertex->distance_from_start + (*edge)->get_weight();
+                        std::cout << "new_dist = " << current_vertex->distance_from_start << " + " << edge_list.front()->get_weight() << std::endl;
+                        unsigned long new_distance = current_vertex->distance_from_start + edge_list.front()->get_weight();
                         std::cout << "new_distance = " << new_distance << std::endl;
                         std::cout << "current neighbor's distance = " << table.at(i).distance_from_start << std::endl;
                         if (new_distance < table.at(i).distance_from_start) {
@@ -74,6 +75,8 @@ void Dijkstra::createTable() {
                         }
                     }
                 }
+                std::cout << "removing the first element of the list" << std::endl;
+                edge_list.pop_front();
             }
         }
         std::cout << "--------------------------------------------------------------------" << std::endl;
