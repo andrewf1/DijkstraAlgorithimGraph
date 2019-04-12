@@ -43,7 +43,7 @@ public:
     Vertex at(std::string label);
     // bool checkPath(std::string curr_vertex, std::string destination);
     // unsigned long calculate_weight(std::vector<std::string> path, unsigned long curr_weight);
-    void Graph::print(std::map<std::string, std::string> parent, std::string endLabel , std::vector<std::string> &path);
+    void print(std::map<std::string, std::string> parent, std::string endLabel , std::vector<std::string> &path);
 
     virtual void addVertex(std::string label); //inserts a new vertex storing the element
     virtual void removeVertex(std::string label);  // remove vertex containing the element and all its incident edges
