@@ -19,21 +19,34 @@ void Dijkstra::createTable() {
             table.push_back(row);
         }
     }
-    std::cout << "-----------------------------------" << std::endl;
+
     std::cout << "about to enter main while loop" << std::endl;
     while (!unvisited.empty()) {
         dRow* current_vertex = new dRow;
         current_vertex = &table.at(0);
         std::cout << "current vertex = " << *(current_vertex->v) << std::endl;
         for (unsigned int i = 0; i < table.size(); i++) {
+            std::cout << i << "time in for loop" << std::endl;
+            std::cout << "is this one visited? " << table.at(i).visited << std::endl;
             if(table.at(i).visited != true) {
+                std::cout << "it was unvisited" << std::endl;
                 dRow* tempVertex = new dRow;
                 *tempVertex = table.at(i);
-                if (tempVertex->distance_from_start < current_vertex->distance_from_start) {
+                std::cout << "tempVertex = " << *(tempVertex->v) << std::endl;
+                if (current_vertex->visited == true) {
+                    std::cout << "the currentVertex was visited" << std::endl;
                     current_vertex = tempVertex;
+                    std::cout << "currentVertex now = " << *(current_vertex->v);
                 }
+                else if (tempVertex->distance_from_start < current_vertex->distance_from_start) {
+                    std::cout << tempVertex->distance_from_start << " < " << current_vertex->distance_from_start << std::endl;
+                    current_vertex = tempVertex;
+                    std::cout << "currentVertex now = " << *(current_vertex->v);
+                }
+                delete tempVertex;
             }
         }
+        std::cout << "-------------------------------------------------" << std::endl;
         auto edge_list = current_vertex->v.get_edge_list();
         for (auto edge : edge_list) {
             for (unsigned int i = 0; i < table.size(); i++) {
