@@ -51,10 +51,9 @@ void Dijkstra::createTable() {
         }
         std::cout << "-------------------------------------------------" << std::endl;
         // checking all the currentVertex's neighbors to properly updated the shortest distance if applicable
-        auto edge_list = current_vertex->v.get_edge_list();
         std::cout << "about to check all the neighbors of the current_vertex" << std::endl;
         int n =0;
-        for (auto edge = edge_list.begin(); edge != edge_list.end(); edge++) {
+        for (auto edge = current_vertex->v.get_edge_list().begin(); edge != current_vertex->v.get_edge_list().end(); edge++) {
             std:: cout << n++ << " time in outter edge_list for loop" << std::endl;
             for (unsigned int i = 0; i < table.size(); i++) {
                 std::cout << i << " time in inner table loop" << std::endl;
