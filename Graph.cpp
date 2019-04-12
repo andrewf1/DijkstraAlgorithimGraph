@@ -256,6 +256,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
             for (auto x : adjacency_list.at(i).get_edge_list()) {
                 if(!(*adjacency_list.at(i) == str1)) {
                     if(!(x->get_endpoint() == str1)) {
+                        path.push_back(str1);
                         continue;
                     }
                     else {
@@ -263,7 +264,6 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                     }
                 }
                 else {
-                    path.push_back(B);
                     B = x->get_endpoint();
                 }
                 auto weight = x->get_weight();
