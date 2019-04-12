@@ -256,7 +256,6 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
             for (auto x : adjacency_list.at(i).get_edge_list()) {
                 if(!(*adjacency_list.at(i) == str1)) {
                     if(!(x->get_endpoint() == str1)) {
-                        path.push_back(B);
                         continue;
                     }
                     else {
@@ -268,6 +267,7 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                 }
                 auto weight = x->get_weight();
                 if(!(distance[B] > distance[str1] + weight)) {
+                    path.push_back(B);
                     continue;
                 }
                 parent[B] = str1;
