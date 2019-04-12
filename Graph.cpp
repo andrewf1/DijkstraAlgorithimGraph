@@ -259,11 +259,11 @@ unsigned long Graph::shortestPath(std::string startLabel, std::string endLabel, 
                         continue;
                     }
                     else {
+                        path.push_back(str1);
                         B = *adjacency_list.at(i);
                     }
                 }
                 else {
-                    path.push_back(str1);
                     B = x->get_endpoint();
                 }
                 auto weight = x->get_weight();
